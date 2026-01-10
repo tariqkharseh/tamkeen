@@ -29,7 +29,7 @@ export default function Home() {
   const [rangeType, setRangeType] = useState<RangeType>("juz");
   const [rangeStart, setRangeStart] = useState<number>(1);
   const [rangeEnd, setRangeEnd] = useState<number>(30);
-  
+
   const [verseData, setVerseData] = useState<VerseData | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);

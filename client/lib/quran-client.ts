@@ -3,11 +3,13 @@
 import { QuranClient } from "@quranjs/api";
 
 let clientInstance: QuranClient | null = null;
+const isDevelopment = process.env.NODE_ENV === "development";
+const CLIENT_ID = isDevelopment ? process.env.NEXT_PUBLIC_CLIENT_ID_PREPROD : process.env.NEXT_PUBLIC_CLIENT_ID_PROD;
+const CLIENT_SECRET = isDevelopment ? process.env.NEXT_PUBLIC_CLIENT_SECRET_PREPROD : process.env.NEXT_PUBLIC_CLIENT_SECRET_PROD;
+const QURAN_API_ENDPOINT = isDevelopment ? process.env.ENDPOINT_PREPROD : process.env.ENDPOINT_PROD;
 
 // Custom fetch that routes auth requests through our API route to avoid CORS
 function createCustomFetch() {
-  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID_PREPROD;
-  const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET_PREPROD;
 
   return async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
     let url: string;
@@ -29,7 +31,7 @@ function createCustomFetch() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ clientId, clientSecret }),
+        body: JSON.stringify({ clientId: CLIENT_ID, clientSecret: CLIENT_SECRET }),
       });
 
       if (!response.ok) {
@@ -51,10 +53,7 @@ function getQuranClient(): QuranClient {
     return clientInstance;
   }
 
-  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID_PREPROD;
-  const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET_PREPROD;
-
-  if (!clientId || !clientSecret) {
+  if (!CLIENT_ID || !CLIENT_SECRET) {
     throw new Error(
       "NEXT_PUBLIC_CLIENT_ID_PREPROD and NEXT_PUBLIC_CLIENT_SECRET_PREPROD must be set in environment variables"
     );
@@ -65,10 +64,10 @@ function getQuranClient(): QuranClient {
   // contentBaseUrl: "https://apis.quran.foundation"
   // authBaseUrl: "https://oauth2.quran.foundation"
   clientInstance = new QuranClient({
-    clientId,
-    clientSecret,
+    clientId: CLIENT_ID,
+    clientSecret: CLIENT_SECRET,
     contentBaseUrl: "https://apis-prelive.quran.foundation",
-    authBaseUrl: "https://prelive-oauth2.quran.foundation",
+    authBaseUrl: QURAN_API_ENDPOINT,
     fetch: createCustomFetch(), // Use custom fetch that routes auth through our API
   });
 

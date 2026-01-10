@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+const QURAN_API_ENDPOINT = isDevelopment ? process.env.ENDPOINT_PREPROD : process.env.ENDPOINT_PROD;
+
 export async function POST(request: NextRequest) {
   try {
     const { clientId, clientSecret } = await request.json();
@@ -16,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     // Request token from OAuth2 server (server-side, no CORS issues)
     const response = await fetch(
-      "https://prelive-oauth2.quran.foundation/oauth2/token",
+      `${QURAN_API_ENDPOINT}/oauth2/token`,
       {
         method: "POST",
         headers: {
