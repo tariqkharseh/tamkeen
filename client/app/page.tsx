@@ -86,6 +86,7 @@ export default function Home() {
   };
 
   const loadVerseData = async (verseKey: VerseKey) => {
+    setShowAnswer(false)
     try {
       setIsLoading(true);
       // Request verse with codeV1 field for Arabic text display
@@ -296,13 +297,13 @@ export default function Home() {
                     View Mushaf
                   </Button>
                   <Button
-                    onClick={() => setShowAnswer(true)}
+                    onClick={() => setShowAnswer(!showAnswer)}
                     variant="outline"
                     size="lg"
                     className="gap-2"
                   >
                     <FaBook />
-                    Reveal Answer
+                    {showAnswer ? "Hide Answer" : "Reveal Answer"}
                   </Button>
                 </div>
 

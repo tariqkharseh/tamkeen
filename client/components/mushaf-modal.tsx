@@ -32,7 +32,7 @@ export function MushafModal({ isOpen, onClose, pageNumber }: MushafModalProps) {
         </DialogHeader>
         <div className="flex justify-center items-center p-4">
           <Button
-            onClick={() => setCurrentPage(currentPage - 1)}
+            onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage === 1}
             variant="outline"
             className="mx-4"
@@ -48,7 +48,7 @@ export function MushafModal({ isOpen, onClose, pageNumber }: MushafModalProps) {
             unoptimized
           />
           <Button
-            onClick={() => setCurrentPage(currentPage + 1)}
+            onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage === 604}
             variant="outline"
             className="mx-4"

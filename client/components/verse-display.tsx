@@ -67,7 +67,7 @@ export function VerseDisplay({
 
   return (
     <Card className="w-full">
-      <CardContent className="p-8">
+      <CardContent className="p-8 text-right">
         {Array.from({ length: revealVerses ? versesToShow : 1 }).map((_, index) => (
           <span
             key={index}
