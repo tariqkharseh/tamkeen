@@ -49,7 +49,7 @@ export default function Home() {
     pageEnd?: number;
     surahStart?: number;
     surahEnd?: number;
-  }): Promise<string> => {
+  }): Promise<VerseKey> => {
     switch (selector) {
       case "juz": {
         const { juzStart, juzEnd } = data;
@@ -59,7 +59,7 @@ export default function Home() {
         const response = await getQuranClientInstance().verses.findRandom({ juzNumber: randomJuzNumber });
         const chapter = response.verseKey.split(':')[0]
         const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
-        return `${chapter}:${verse}`;
+        return `${chapter}:${verse}` as VerseKey;
       }
       case "chapter": {
         const { surahStart, surahEnd } = data;
@@ -69,7 +69,7 @@ export default function Home() {
         const response = await getQuranClientInstance().verses.findRandom({ chapterNumber: randomSurahNumber });
         const chapter = response.verseKey.split(':')[0]
         const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
-        return `${chapter}:${verse}`;
+        return `${chapter}:${verse}` as VerseKey;
       }
       case "page": {
         const { pageStart, pageEnd } = data;
@@ -78,18 +78,18 @@ export default function Home() {
         const response = await getQuranClientInstance().verses.findRandom({ pageNumber: randomPageNumber });
         const chapter = response.verseKey.split(':')[0]
         const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
-        return `${chapter}:${verse}`;
+        return `${chapter}:${verse}` as VerseKey;
       }
       default:
         throw new Error("Invalid selector");
     }
   };
 
-  const loadVerseData = async (verseKey: string) => {
+  const loadVerseData = async (verseKey: VerseKey) => {
     try {
       setIsLoading(true);
       // Request verse with codeV1 field for Arabic text display
-      const verse = await getQuranClientInstance().verses.findByKey(verseKey as any, {
+      const verse = await getQuranClientInstance().verses.findByKey(verseKey, {
         fields: {
           textUthmani: true,
           codeV1: true,
@@ -102,7 +102,7 @@ export default function Home() {
       
       // Get the Arabic text - prefer codeV1 as that's what the original API used
       // codeV1 is the Quranic script text that matches the QCF fonts
-      const verseText = (verse as any).codeV1
+      const verseText = verse.codeV1
       const verseNumber = verse.verseNumber
       
       // Get page number - prefer v1Page as that matches codeV1
@@ -134,11 +134,11 @@ export default function Home() {
     }
   };
 
-  const loadAudio = async (verseKey: string) => {
+  const loadAudio = async (verseKey: VerseKey) => {
     try {
       setIsLoadingAudio(true);
       // Reciter ID 7 is Mishary Al Afasy
-      const audioData = await getQuranClientInstance().audio.findVerseRecitationsByKey(verseKey as any, "7");
+      const audioData = await getQuranClientInstance().audio.findVerseRecitationsByKey(verseKey, "7");
       
       console.log("Audio data response:", JSON.stringify(audioData, null, 2));
       
@@ -146,7 +146,7 @@ export default function Home() {
       // The response has audioFiles array with VerseRecitation objects that have a 'url' property
       if (audioData && audioData.audioFiles && audioData.audioFiles.length > 0) {
         const audioFile = audioData.audioFiles[0];
-        let url = audioFile.url;
+        const url = audioFile.url;
         
         console.log("Raw audio URL from API:", url);
         console.log("Full audio file object:", JSON.stringify(audioFile, null, 2));
