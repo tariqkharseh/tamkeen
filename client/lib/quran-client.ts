@@ -6,7 +6,6 @@ let clientInstance: QuranClient | null = null;
 const isDevelopment = process.env.NODE_ENV === "development";
 const CLIENT_ID = isDevelopment ? process.env.NEXT_PUBLIC_CLIENT_ID_PREPROD : process.env.NEXT_PUBLIC_CLIENT_ID_PROD;
 const CLIENT_SECRET = isDevelopment ? process.env.NEXT_PUBLIC_CLIENT_SECRET_PREPROD : process.env.NEXT_PUBLIC_CLIENT_SECRET_PROD;
-const QURAN_API_ENDPOINT = isDevelopment ? process.env.ENDPOINT_PREPROD : process.env.ENDPOINT_PROD;
 
 // Custom fetch that routes auth requests through our API route to avoid CORS
 function createCustomFetch() {
@@ -66,8 +65,8 @@ function getQuranClient(): QuranClient {
   clientInstance = new QuranClient({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    contentBaseUrl: "https://apis-prelive.quran.foundation",
-    authBaseUrl: QURAN_API_ENDPOINT,
+    contentBaseUrl: isDevelopment ? "https://apis-prelive.quran.foundation": "https://apis.quran.foundation",
+    authBaseUrl: isDevelopment ? "https://prelive-oauth2.quran.foundation" : "https://oauth2.quran.foundation",
     fetch: createCustomFetch(), // Use custom fetch that routes auth through our API
   });
 
