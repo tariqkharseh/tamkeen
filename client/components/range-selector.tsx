@@ -2,18 +2,34 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type RangeType = "juz" | "page" | "chapter";
 
 interface RangeSelectorProps {
   onStart: (type: RangeType, start: number, end: number) => void;
+  numVersesToRead: number
+  setNumVersesToRead: (num: number) => void;
 }
 
-export function RangeSelector({ onStart }: RangeSelectorProps) {
+export function RangeSelector({ onStart, numVersesToRead, setNumVersesToRead }: RangeSelectorProps) {
   const [rangeType, setRangeType] = useState<RangeType>("juz");
   const [start, setStart] = useState<string>("1");
   const [end, setEnd] = useState<string>("30");
@@ -21,7 +37,7 @@ export function RangeSelector({ onStart }: RangeSelectorProps) {
   const handleRangeTypeChange = (value: string) => {
     const type = value as RangeType;
     setRangeType(type);
-    
+
     // Set default ranges based on type
     if (type === "juz") {
       setStart("1");
@@ -38,28 +54,29 @@ export function RangeSelector({ onStart }: RangeSelectorProps) {
   const handleStart = () => {
     const startNum = parseInt(start);
     const endNum = parseInt(end);
-    
+
     if (isNaN(startNum) || isNaN(endNum)) {
       alert("Please enter valid numbers");
       return;
     }
-    
+
     if (startNum > endNum) {
       alert("Start value must be less than or equal to end value");
       return;
     }
-    
+
     if (startNum < 1) {
       alert("Start value must be at least 1");
       return;
     }
-    
-    const maxValue = rangeType === "juz" ? 30 : rangeType === "page" ? 604 : 114;
+
+    const maxValue =
+      rangeType === "juz" ? 30 : rangeType === "page" ? 604 : 114;
     if (endNum > maxValue) {
       alert(`End value must be at most ${maxValue}`);
       return;
     }
-    
+
     onStart(rangeType, startNum, endNum);
   };
 
@@ -118,6 +135,21 @@ export function RangeSelector({ onStart }: RangeSelectorProps) {
           </div>
         </div>
 
+        <div>
+          I want to be tested on the next{" "}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="text-blue-500 font-bold cursor-pointer">
+              {numVersesToRead}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {Array.from({ length: 5 }, (_, i) => (
+                <DropdownMenuItem className={numVersesToRead === i + 1 ? 'bg-blue-100' : '' } onClick={()=>setNumVersesToRead(i+1)} key={i + 1}>{i + 1}</DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>{" "}
+          verses.
+        </div>
+
         <Button onClick={handleStart} className="w-full" size="lg">
           Start Test
         </Button>
@@ -125,4 +157,3 @@ export function RangeSelector({ onStart }: RangeSelectorProps) {
     </Card>
   );
 }
-

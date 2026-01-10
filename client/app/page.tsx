@@ -25,13 +25,12 @@ function randomRangeInclusive(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const NUM_VERSES_TO_READ = 3
-
 export default function Home() {
   const [testState, setTestState] = useState<TestState>("setup");
   const [rangeType, setRangeType] = useState<RangeType>("juz");
   const [rangeStart, setRangeStart] = useState<number>(1);
   const [rangeEnd, setRangeEnd] = useState<number>(30);
+  const [numVersesToRead, setNumVersesToRead] = useState<number>(3);
 
   const [verseData, setVerseData] = useState<VerseData | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -58,7 +57,7 @@ export default function Home() {
         console.log("randomJuzNumber", randomJuzNumber);
         const response = await getQuranClientInstance().verses.findRandom({ juzNumber: randomJuzNumber });
         const chapter = response.verseKey.split(':')[0]
-        const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
+        const verse = Math.max(1, response.verseNumber - numVersesToRead + 1)
         return `${chapter}:${verse}` as VerseKey;
       }
       case "chapter": {
@@ -68,7 +67,7 @@ export default function Home() {
         console.log("randomSurahNumber", randomSurahNumber);
         const response = await getQuranClientInstance().verses.findRandom({ chapterNumber: randomSurahNumber });
         const chapter = response.verseKey.split(':')[0]
-        const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
+        const verse = Math.max(1, response.verseNumber - numVersesToRead + 1)
         return `${chapter}:${verse}` as VerseKey;
       }
       case "page": {
@@ -77,7 +76,7 @@ export default function Home() {
         const randomPageNumber = randomRangeInclusive(pageStart, pageEnd);
         const response = await getQuranClientInstance().verses.findRandom({ pageNumber: randomPageNumber });
         const chapter = response.verseKey.split(':')[0]
-        const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
+        const verse = Math.max(1, response.verseNumber - numVersesToRead + 1)
         return `${chapter}:${verse}` as VerseKey;
       }
       default:
@@ -267,7 +266,7 @@ export default function Home() {
         </div>
 
         {testState === "setup" && (
-          <RangeSelector onStart={handleStartTest} />
+          <RangeSelector onStart={handleStartTest} setNumVersesToRead={setNumVersesToRead} numVersesToRead={numVersesToRead} />
         )}
 
         {testState === "testing" && (
@@ -281,7 +280,7 @@ export default function Home() {
                 <VerseDisplay
                   verseKey={verseData.verseKey}
                   verseNumber={verseData.verseNumber}
-                  versesToShow={NUM_VERSES_TO_READ}
+                  versesToShow={numVersesToRead}
                   revealVerses={showAnswer}
                 />
                 
