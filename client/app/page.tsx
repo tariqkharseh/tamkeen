@@ -10,19 +10,22 @@ import { ResultsScreen } from "@/components/results-screen";
 import { getQuranClientInstance } from "@/lib/quran-client";
 import { Button } from "@/components/ui/button";
 import { FaBook } from "react-icons/fa";
+import { VerseKey } from "@quranjs/api";
 
 type TestState = "setup" | "testing" | "results";
 type RangeType = "juz" | "page" | "chapter";
 
 interface VerseData {
-  verseKey: string;
-  verseText: string;
+  verseKey: VerseKey;
+  verseNumber: number;
   pageNumber: number;
 }
 
 function randomRangeInclusive(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+const NUM_VERSES_TO_READ = 3
 
 export default function Home() {
   const [testState, setTestState] = useState<TestState>("setup");
@@ -54,7 +57,9 @@ export default function Home() {
         const randomJuzNumber = randomRangeInclusive(juzStart, juzEnd);
         console.log("randomJuzNumber", randomJuzNumber);
         const response = await getQuranClientInstance().verses.findRandom({ juzNumber: randomJuzNumber });
-        return response.verseKey;
+        const chapter = response.verseKey.split(':')[0]
+        const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
+        return `${chapter}:${verse}`;
       }
       case "chapter": {
         const { surahStart, surahEnd } = data;
@@ -62,15 +67,18 @@ export default function Home() {
         const randomSurahNumber = randomRangeInclusive(surahStart, surahEnd);
         console.log("randomSurahNumber", randomSurahNumber);
         const response = await getQuranClientInstance().verses.findRandom({ chapterNumber: randomSurahNumber });
-        return response.verseKey;
-
+        const chapter = response.verseKey.split(':')[0]
+        const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
+        return `${chapter}:${verse}`;
       }
       case "page": {
         const { pageStart, pageEnd } = data;
         if (!pageStart || !pageEnd) throw new Error("Invalid page range");
         const randomPageNumber = randomRangeInclusive(pageStart, pageEnd);
         const response = await getQuranClientInstance().verses.findRandom({ pageNumber: randomPageNumber });
-        return response.verseKey;
+        const chapter = response.verseKey.split(':')[0]
+        const verse = Math.max(1, response.verseNumber - NUM_VERSES_TO_READ + 1)
+        return `${chapter}:${verse}`;
       }
       default:
         throw new Error("Invalid selector");
@@ -95,6 +103,7 @@ export default function Home() {
       // Get the Arabic text - prefer codeV1 as that's what the original API used
       // codeV1 is the Quranic script text that matches the QCF fonts
       const verseText = (verse as any).codeV1
+      const verseNumber = verse.verseNumber
       
       // Get page number - prefer v1Page as that matches codeV1
       const pageNumber = verse.pageNumber
@@ -111,7 +120,7 @@ export default function Home() {
 
       setVerseData({
         verseKey,
-        verseText,
+        verseNumber,
         pageNumber,
       });
 
@@ -269,13 +278,11 @@ export default function Home() {
             ) : verseData ? (
               <>
                 <VerseDisplay
-                  verseText={verseData.verseText}
-                  pageNumber={verseData.pageNumber}
+                  verseKey={verseData.verseKey}
+                  verseNumber={verseData.verseNumber}
+                  versesToShow={NUM_VERSES_TO_READ}
+                  revealVerses={showAnswer}
                 />
-                {showAnswer && <VerseDisplay
-                  verseText={verseData.verseText}
-                  pageNumber={verseData.pageNumber}
-                />}
                 
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                   <AudioPlayer audioUrl={audioUrl} isLoading={isLoadingAudio} />
