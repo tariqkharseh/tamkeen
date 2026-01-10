@@ -1,0 +1,5580 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+@font-face {
+  font-family: QCF_BSML;
+  src: url(../app/fonts/QCF_BSML.TTF);
+}
+
+.QCF_BSML {
+  font-family: QCF_BSML;
+}
+
+@font-face {
+  font-family: QCF_P001;
+  src: url(../app/fonts/QCF_P001.TTF);
+}
+
+.QCF_P001 {
+  font-family: QCF_P001;
+}
+
+@font-face {
+  font-family: QCF_P002;
+  src: url(../app/fonts/QCF_P002.TTF);
+}
+
+.QCF_P002 {
+  font-family: QCF_P002;
+}
+
+@font-face {
+  font-family: QCF_P003;
+  src: url(../app/fonts/QCF_P003.TTF);
+}
+
+.QCF_P003 {
+  font-family: QCF_P003;
+}
+
+@font-face {
+  font-family: QCF_P004;
+  src: url(../app/fonts/QCF_P004.TTF);
+}
+
+.QCF_P004 {
+  font-family: QCF_P004;
+}
+
+@font-face {
+  font-family: QCF_P005;
+  src: url(../app/fonts/QCF_P005.TTF);
+}
+
+.QCF_P005 {
+  font-family: QCF_P005;
+}
+
+@font-face {
+  font-family: QCF_P006;
+  src: url(../app/fonts/QCF_P006.TTF);
+}
+
+.QCF_P006 {
+  font-family: QCF_P006;
+}
+
+@font-face {
+  font-family: QCF_P007;
+  src: url(../app/fonts/QCF_P007.TTF);
+}
+
+.QCF_P007 {
+  font-family: QCF_P007;
+}
+
+@font-face {
+  font-family: QCF_P008;
+  src: url(../app/fonts/QCF_P008.TTF);
+}
+
+.QCF_P008 {
+  font-family: QCF_P008;
+}
+
+@font-face {
+  font-family: QCF_P009;
+  src: url(../app/fonts/QCF_P009.TTF);
+}
+
+.QCF_P009 {
+  font-family: QCF_P009;
+}
+
+@font-face {
+  font-family: QCF_P010;
+  src: url(../app/fonts/QCF_P010.TTF);
+}
+
+.QCF_P010 {
+  font-family: QCF_P010;
+}
+
+@font-face {
+  font-family: QCF_P011;
+  src: url(../app/fonts/QCF_P011.TTF);
+}
+
+.QCF_P011 {
+  font-family: QCF_P011;
+}
+
+@font-face {
+  font-family: QCF_P012;
+  src: url(../app/fonts/QCF_P012.TTF);
+}
+
+.QCF_P012 {
+  font-family: QCF_P012;
+}
+
+@font-face {
+  font-family: QCF_P013;
+  src: url(../app/fonts/QCF_P013.TTF);
+}
+
+.QCF_P013 {
+  font-family: QCF_P013;
+}
+
+@font-face {
+  font-family: QCF_P014;
+  src: url(../app/fonts/QCF_P014.TTF);
+}
+
+.QCF_P014 {
+  font-family: QCF_P014;
+}
+
+@font-face {
+  font-family: QCF_P015;
+  src: url(../app/fonts/QCF_P015.TTF);
+}
+
+.QCF_P015 {
+  font-family: QCF_P015;
+}
+
+@font-face {
+  font-family: QCF_P016;
+  src: url(../app/fonts/QCF_P016.TTF);
+}
+
+.QCF_P016 {
+  font-family: QCF_P016;
+}
+
+@font-face {
+  font-family: QCF_P017;
+  src: url(../app/fonts/QCF_P017.TTF);
+}
+
+.QCF_P017 {
+  font-family: QCF_P017;
+}
+
+@font-face {
+  font-family: QCF_P018;
+  src: url(../app/fonts/QCF_P018.TTF);
+}
+
+.QCF_P018 {
+  font-family: QCF_P018;
+}
+
+@font-face {
+  font-family: QCF_P019;
+  src: url(../app/fonts/QCF_P019.TTF);
+}
+
+.QCF_P019 {
+  font-family: QCF_P019;
+}
+
+@font-face {
+  font-family: QCF_P020;
+  src: url(../app/fonts/QCF_P020.TTF);
+}
+
+.QCF_P020 {
+  font-family: QCF_P020;
+}
+
+@font-face {
+  font-family: QCF_P021;
+  src: url(../app/fonts/QCF_P021.TTF);
+}
+
+.QCF_P021 {
+  font-family: QCF_P021;
+}
+
+@font-face {
+  font-family: QCF_P022;
+  src: url(../app/fonts/QCF_P022.TTF);
+}
+
+.QCF_P022 {
+  font-family: QCF_P022;
+}
+
+@font-face {
+  font-family: QCF_P023;
+  src: url(../app/fonts/QCF_P023.TTF);
+}
+
+.QCF_P023 {
+  font-family: QCF_P023;
+}
+
+@font-face {
+  font-family: QCF_P024;
+  src: url(../app/fonts/QCF_P024.TTF);
+}
+
+.QCF_P024 {
+  font-family: QCF_P024;
+}
+
+@font-face {
+  font-family: QCF_P025;
+  src: url(../app/fonts/QCF_P025.TTF);
+}
+
+.QCF_P025 {
+  font-family: QCF_P025;
+}
+
+@font-face {
+  font-family: QCF_P026;
+  src: url(../app/fonts/QCF_P026.TTF);
+}
+
+.QCF_P026 {
+  font-family: QCF_P026;
+}
+
+@font-face {
+  font-family: QCF_P027;
+  src: url(../app/fonts/QCF_P027.TTF);
+}
+
+.QCF_P027 {
+  font-family: QCF_P027;
+}
+
+@font-face {
+  font-family: QCF_P028;
+  src: url(../app/fonts/QCF_P028.TTF);
+}
+
+.QCF_P028 {
+  font-family: QCF_P028;
+}
+
+@font-face {
+  font-family: QCF_P029;
+  src: url(../app/fonts/QCF_P029.TTF);
+}
+
+.QCF_P029 {
+  font-family: QCF_P029;
+}
+
+@font-face {
+  font-family: QCF_P030;
+  src: url(../app/fonts/QCF_P030.TTF);
+}
+
+.QCF_P030 {
+  font-family: QCF_P030;
+}
+
+@font-face {
+  font-family: QCF_P031;
+  src: url(../app/fonts/QCF_P031.TTF);
+}
+
+.QCF_P031 {
+  font-family: QCF_P031;
+}
+
+@font-face {
+  font-family: QCF_P032;
+  src: url(../app/fonts/QCF_P032.TTF);
+}
+
+.QCF_P032 {
+  font-family: QCF_P032;
+}
+
+@font-face {
+  font-family: QCF_P033;
+  src: url(../app/fonts/QCF_P033.TTF);
+}
+
+.QCF_P033 {
+  font-family: QCF_P033;
+}
+
+@font-face {
+  font-family: QCF_P034;
+  src: url(../app/fonts/QCF_P034.TTF);
+}
+
+.QCF_P034 {
+  font-family: QCF_P034;
+}
+
+@font-face {
+  font-family: QCF_P035;
+  src: url(../app/fonts/QCF_P035.TTF);
+}
+
+.QCF_P035 {
+  font-family: QCF_P035;
+}
+
+@font-face {
+  font-family: QCF_P036;
+  src: url(../app/fonts/QCF_P036.TTF);
+}
+
+.QCF_P036 {
+  font-family: QCF_P036;
+}
+
+@font-face {
+  font-family: QCF_P037;
+  src: url(../app/fonts/QCF_P037.TTF);
+}
+
+.QCF_P037 {
+  font-family: QCF_P037;
+}
+
+@font-face {
+  font-family: QCF_P038;
+  src: url(../app/fonts/QCF_P038.TTF);
+}
+
+.QCF_P038 {
+  font-family: QCF_P038;
+}
+
+@font-face {
+  font-family: QCF_P039;
+  src: url(../app/fonts/QCF_P039.TTF);
+}
+
+.QCF_P039 {
+  font-family: QCF_P039;
+}
+
+@font-face {
+  font-family: QCF_P040;
+  src: url(../app/fonts/QCF_P040.TTF);
+}
+
+.QCF_P040 {
+  font-family: QCF_P040;
+}
+
+@font-face {
+  font-family: QCF_P041;
+  src: url(../app/fonts/QCF_P041.TTF);
+}
+
+.QCF_P041 {
+  font-family: QCF_P041;
+}
+
+@font-face {
+  font-family: QCF_P042;
+  src: url(../app/fonts/QCF_P042.TTF);
+}
+
+.QCF_P042 {
+  font-family: QCF_P042;
+}
+
+@font-face {
+  font-family: QCF_P043;
+  src: url(../app/fonts/QCF_P043.TTF);
+}
+
+.QCF_P043 {
+  font-family: QCF_P043;
+}
+
+@font-face {
+  font-family: QCF_P044;
+  src: url(../app/fonts/QCF_P044.TTF);
+}
+
+.QCF_P044 {
+  font-family: QCF_P044;
+}
+
+@font-face {
+  font-family: QCF_P045;
+  src: url(../app/fonts/QCF_P045.TTF);
+}
+
+.QCF_P045 {
+  font-family: QCF_P045;
+}
+
+@font-face {
+  font-family: QCF_P046;
+  src: url(../app/fonts/QCF_P046.TTF);
+}
+
+.QCF_P046 {
+  font-family: QCF_P046;
+}
+
+@font-face {
+  font-family: QCF_P047;
+  src: url(../app/fonts/QCF_P047.TTF);
+}
+
+.QCF_P047 {
+  font-family: QCF_P047;
+}
+
+@font-face {
+  font-family: QCF_P048;
+  src: url(../app/fonts/QCF_P048.TTF);
+}
+
+.QCF_P048 {
+  font-family: QCF_P048;
+}
+
+@font-face {
+  font-family: QCF_P049;
+  src: url(../app/fonts/QCF_P049.TTF);
+}
+
+.QCF_P049 {
+  font-family: QCF_P049;
+}
+
+@font-face {
+  font-family: QCF_P050;
+  src: url(../app/fonts/QCF_P050.TTF);
+}
+
+.QCF_P050 {
+  font-family: QCF_P050;
+}
+
+@font-face {
+  font-family: QCF_P051;
+  src: url(../app/fonts/QCF_P051.TTF);
+}
+
+.QCF_P051 {
+  font-family: QCF_P051;
+}
+
+@font-face {
+  font-family: QCF_P052;
+  src: url(../app/fonts/QCF_P052.TTF);
+}
+
+.QCF_P052 {
+  font-family: QCF_P052;
+}
+
+@font-face {
+  font-family: QCF_P053;
+  src: url(../app/fonts/QCF_P053.TTF);
+}
+
+.QCF_P053 {
+  font-family: QCF_P053;
+}
+
+@font-face {
+  font-family: QCF_P054;
+  src: url(../app/fonts/QCF_P054.TTF);
+}
+
+.QCF_P054 {
+  font-family: QCF_P054;
+}
+
+@font-face {
+  font-family: QCF_P055;
+  src: url(../app/fonts/QCF_P055.TTF);
+}
+
+.QCF_P055 {
+  font-family: QCF_P055;
+}
+
+@font-face {
+  font-family: QCF_P056;
+  src: url(../app/fonts/QCF_P056.TTF);
+}
+
+.QCF_P056 {
+  font-family: QCF_P056;
+}
+
+@font-face {
+  font-family: QCF_P057;
+  src: url(../app/fonts/QCF_P057.TTF);
+}
+
+.QCF_P057 {
+  font-family: QCF_P057;
+}
+
+@font-face {
+  font-family: QCF_P058;
+  src: url(../app/fonts/QCF_P058.TTF);
+}
+
+.QCF_P058 {
+  font-family: QCF_P058;
+}
+
+@font-face {
+  font-family: QCF_P059;
+  src: url(../app/fonts/QCF_P059.TTF);
+}
+
+.QCF_P059 {
+  font-family: QCF_P059;
+}
+
+@font-face {
+  font-family: QCF_P060;
+  src: url(../app/fonts/QCF_P060.TTF);
+}
+
+.QCF_P060 {
+  font-family: QCF_P060;
+}
+
+@font-face {
+  font-family: QCF_P061;
+  src: url(../app/fonts/QCF_P061.TTF);
+}
+
+.QCF_P061 {
+  font-family: QCF_P061;
+}
+
+@font-face {
+  font-family: QCF_P062;
+  src: url(../app/fonts/QCF_P062.TTF);
+}
+
+.QCF_P062 {
+  font-family: QCF_P062;
+}
+
+@font-face {
+  font-family: QCF_P063;
+  src: url(../app/fonts/QCF_P063.TTF);
+}
+
+.QCF_P063 {
+  font-family: QCF_P063;
+}
+
+@font-face {
+  font-family: QCF_P064;
+  src: url(../app/fonts/QCF_P064.TTF);
+}
+
+.QCF_P064 {
+  font-family: QCF_P064;
+}
+
+@font-face {
+  font-family: QCF_P065;
+  src: url(../app/fonts/QCF_P065.TTF);
+}
+
+.QCF_P065 {
+  font-family: QCF_P065;
+}
+
+@font-face {
+  font-family: QCF_P066;
+  src: url(../app/fonts/QCF_P066.TTF);
+}
+
+.QCF_P066 {
+  font-family: QCF_P066;
+}
+
+@font-face {
+  font-family: QCF_P067;
+  src: url(../app/fonts/QCF_P067.TTF);
+}
+
+.QCF_P067 {
+  font-family: QCF_P067;
+}
+
+@font-face {
+  font-family: QCF_P068;
+  src: url(../app/fonts/QCF_P068.TTF);
+}
+
+.QCF_P068 {
+  font-family: QCF_P068;
+}
+
+@font-face {
+  font-family: QCF_P069;
+  src: url(../app/fonts/QCF_P069.TTF);
+}
+
+.QCF_P069 {
+  font-family: QCF_P069;
+}
+
+@font-face {
+  font-family: QCF_P070;
+  src: url(../app/fonts/QCF_P070.TTF);
+}
+
+.QCF_P070 {
+  font-family: QCF_P070;
+}
+
+@font-face {
+  font-family: QCF_P071;
+  src: url(../app/fonts/QCF_P071.TTF);
+}
+
+.QCF_P071 {
+  font-family: QCF_P071;
+}
+
+@font-face {
+  font-family: QCF_P072;
+  src: url(../app/fonts/QCF_P072.TTF);
+}
+
+.QCF_P072 {
+  font-family: QCF_P072;
+}
+
+@font-face {
+  font-family: QCF_P073;
+  src: url(../app/fonts/QCF_P073.TTF);
+}
+
+.QCF_P073 {
+  font-family: QCF_P073;
+}
+
+@font-face {
+  font-family: QCF_P074;
+  src: url(../app/fonts/QCF_P074.TTF);
+}
+
+.QCF_P074 {
+  font-family: QCF_P074;
+}
+
+@font-face {
+  font-family: QCF_P075;
+  src: url(../app/fonts/QCF_P075.TTF);
+}
+
+.QCF_P075 {
+  font-family: QCF_P075;
+}
+
+@font-face {
+  font-family: QCF_P076;
+  src: url(../app/fonts/QCF_P076.TTF);
+}
+
+.QCF_P076 {
+  font-family: QCF_P076;
+}
+
+@font-face {
+  font-family: QCF_P077;
+  src: url(../app/fonts/QCF_P077.TTF);
+}
+
+.QCF_P077 {
+  font-family: QCF_P077;
+}
+
+@font-face {
+  font-family: QCF_P078;
+  src: url(../app/fonts/QCF_P078.TTF);
+}
+
+.QCF_P078 {
+  font-family: QCF_P078;
+}
+
+@font-face {
+  font-family: QCF_P079;
+  src: url(../app/fonts/QCF_P079.TTF);
+}
+
+.QCF_P079 {
+  font-family: QCF_P079;
+}
+
+@font-face {
+  font-family: QCF_P080;
+  src: url(../app/fonts/QCF_P080.TTF);
+}
+
+.QCF_P080 {
+  font-family: QCF_P080;
+}
+
+@font-face {
+  font-family: QCF_P081;
+  src: url(../app/fonts/QCF_P081.TTF);
+}
+
+.QCF_P081 {
+  font-family: QCF_P081;
+}
+
+@font-face {
+  font-family: QCF_P082;
+  src: url(../app/fonts/QCF_P082.TTF);
+}
+
+.QCF_P082 {
+  font-family: QCF_P082;
+}
+
+@font-face {
+  font-family: QCF_P083;
+  src: url(../app/fonts/QCF_P083.TTF);
+}
+
+.QCF_P083 {
+  font-family: QCF_P083;
+}
+
+@font-face {
+  font-family: QCF_P084;
+  src: url(../app/fonts/QCF_P084.TTF);
+}
+
+.QCF_P084 {
+  font-family: QCF_P084;
+}
+
+@font-face {
+  font-family: QCF_P085;
+  src: url(../app/fonts/QCF_P085.TTF);
+}
+
+.QCF_P085 {
+  font-family: QCF_P085;
+}
+
+@font-face {
+  font-family: QCF_P086;
+  src: url(../app/fonts/QCF_P086.TTF);
+}
+
+.QCF_P086 {
+  font-family: QCF_P086;
+}
+
+@font-face {
+  font-family: QCF_P087;
+  src: url(../app/fonts/QCF_P087.TTF);
+}
+
+.QCF_P087 {
+  font-family: QCF_P087;
+}
+
+@font-face {
+  font-family: QCF_P088;
+  src: url(../app/fonts/QCF_P088.TTF);
+}
+
+.QCF_P088 {
+  font-family: QCF_P088;
+}
+
+@font-face {
+  font-family: QCF_P089;
+  src: url(../app/fonts/QCF_P089.TTF);
+}
+
+.QCF_P089 {
+  font-family: QCF_P089;
+}
+
+@font-face {
+  font-family: QCF_P090;
+  src: url(../app/fonts/QCF_P090.TTF);
+}
+
+.QCF_P090 {
+  font-family: QCF_P090;
+}
+
+@font-face {
+  font-family: QCF_P091;
+  src: url(../app/fonts/QCF_P091.TTF);
+}
+
+.QCF_P091 {
+  font-family: QCF_P091;
+}
+
+@font-face {
+  font-family: QCF_P092;
+  src: url(../app/fonts/QCF_P092.TTF);
+}
+
+.QCF_P092 {
+  font-family: QCF_P092;
+}
+
+@font-face {
+  font-family: QCF_P093;
+  src: url(../app/fonts/QCF_P093.TTF);
+}
+
+.QCF_P093 {
+  font-family: QCF_P093;
+}
+
+@font-face {
+  font-family: QCF_P094;
+  src: url(../app/fonts/QCF_P094.TTF);
+}
+
+.QCF_P094 {
+  font-family: QCF_P094;
+}
+
+@font-face {
+  font-family: QCF_P095;
+  src: url(../app/fonts/QCF_P095.TTF);
+}
+
+.QCF_P095 {
+  font-family: QCF_P095;
+}
+
+@font-face {
+  font-family: QCF_P096;
+  src: url(../app/fonts/QCF_P096.TTF);
+}
+
+.QCF_P096 {
+  font-family: QCF_P096;
+}
+
+@font-face {
+  font-family: QCF_P097;
+  src: url(../app/fonts/QCF_P097.TTF);
+}
+
+.QCF_P097 {
+  font-family: QCF_P097;
+}
+
+@font-face {
+  font-family: QCF_P098;
+  src: url(../app/fonts/QCF_P098.TTF);
+}
+
+.QCF_P098 {
+  font-family: QCF_P098;
+}
+
+@font-face {
+  font-family: QCF_P099;
+  src: url(../app/fonts/QCF_P099.TTF);
+}
+
+.QCF_P099 {
+  font-family: QCF_P099;
+}
+
+@font-face {
+  font-family: QCF_P100;
+  src: url(../app/fonts/QCF_P100.TTF);
+}
+
+.QCF_P100 {
+  font-family: QCF_P100;
+}
+
+@font-face {
+  font-family: QCF_P101;
+  src: url(../app/fonts/QCF_P101.TTF);
+}
+
+.QCF_P101 {
+  font-family: QCF_P101;
+}
+
+@font-face {
+  font-family: QCF_P102;
+  src: url(../app/fonts/QCF_P102.TTF);
+}
+
+.QCF_P102 {
+  font-family: QCF_P102;
+}
+
+@font-face {
+  font-family: QCF_P103;
+  src: url(../app/fonts/QCF_P103.TTF);
+}
+
+.QCF_P103 {
+  font-family: QCF_P103;
+}
+
+@font-face {
+  font-family: QCF_P104;
+  src: url(../app/fonts/QCF_P104.TTF);
+}
+
+.QCF_P104 {
+  font-family: QCF_P104;
+}
+
+@font-face {
+  font-family: QCF_P105;
+  src: url(../app/fonts/QCF_P105.TTF);
+}
+
+.QCF_P105 {
+  font-family: QCF_P105;
+}
+
+@font-face {
+  font-family: QCF_P106;
+  src: url(../app/fonts/QCF_P106.TTF);
+}
+
+.QCF_P106 {
+  font-family: QCF_P106;
+}
+
+@font-face {
+  font-family: QCF_P107;
+  src: url(../app/fonts/QCF_P107.TTF);
+}
+
+.QCF_P107 {
+  font-family: QCF_P107;
+}
+
+@font-face {
+  font-family: QCF_P108;
+  src: url(../app/fonts/QCF_P108.TTF);
+}
+
+.QCF_P108 {
+  font-family: QCF_P108;
+}
+
+@font-face {
+  font-family: QCF_P109;
+  src: url(../app/fonts/QCF_P109.TTF);
+}
+
+.QCF_P109 {
+  font-family: QCF_P109;
+}
+
+@font-face {
+  font-family: QCF_P110;
+  src: url(../app/fonts/QCF_P110.TTF);
+}
+
+.QCF_P110 {
+  font-family: QCF_P110;
+}
+
+@font-face {
+  font-family: QCF_P111;
+  src: url(../app/fonts/QCF_P111.TTF);
+}
+
+.QCF_P111 {
+  font-family: QCF_P111;
+}
+
+@font-face {
+  font-family: QCF_P112;
+  src: url(../app/fonts/QCF_P112.TTF);
+}
+
+.QCF_P112 {
+  font-family: QCF_P112;
+}
+
+@font-face {
+  font-family: QCF_P113;
+  src: url(../app/fonts/QCF_P113.TTF);
+}
+
+.QCF_P113 {
+  font-family: QCF_P113;
+}
+
+@font-face {
+  font-family: QCF_P114;
+  src: url(../app/fonts/QCF_P114.TTF);
+}
+
+.QCF_P114 {
+  font-family: QCF_P114;
+}
+
+@font-face {
+  font-family: QCF_P115;
+  src: url(../app/fonts/QCF_P115.TTF);
+}
+
+.QCF_P115 {
+  font-family: QCF_P115;
+}
+
+@font-face {
+  font-family: QCF_P116;
+  src: url(../app/fonts/QCF_P116.TTF);
+}
+
+.QCF_P116 {
+  font-family: QCF_P116;
+}
+
+@font-face {
+  font-family: QCF_P117;
+  src: url(../app/fonts/QCF_P117.TTF);
+}
+
+.QCF_P117 {
+  font-family: QCF_P117;
+}
+
+@font-face {
+  font-family: QCF_P118;
+  src: url(../app/fonts/QCF_P118.TTF);
+}
+
+.QCF_P118 {
+  font-family: QCF_P118;
+}
+
+@font-face {
+  font-family: QCF_P119;
+  src: url(../app/fonts/QCF_P119.TTF);
+}
+
+.QCF_P119 {
+  font-family: QCF_P119;
+}
+
+@font-face {
+  font-family: QCF_P120;
+  src: url(../app/fonts/QCF_P120.TTF);
+}
+
+.QCF_P120 {
+  font-family: QCF_P120;
+}
+
+@font-face {
+  font-family: QCF_P121;
+  src: url(../app/fonts/QCF_P121.TTF);
+}
+
+.QCF_P121 {
+  font-family: QCF_P121;
+}
+
+@font-face {
+  font-family: QCF_P122;
+  src: url(../app/fonts/QCF_P122.TTF);
+}
+
+.QCF_P122 {
+  font-family: QCF_P122;
+}
+
+@font-face {
+  font-family: QCF_P123;
+  src: url(../app/fonts/QCF_P123.TTF);
+}
+
+.QCF_P123 {
+  font-family: QCF_P123;
+}
+
+@font-face {
+  font-family: QCF_P124;
+  src: url(../app/fonts/QCF_P124.TTF);
+}
+
+.QCF_P124 {
+  font-family: QCF_P124;
+}
+
+@font-face {
+  font-family: QCF_P125;
+  src: url(../app/fonts/QCF_P125.TTF);
+}
+
+.QCF_P125 {
+  font-family: QCF_P125;
+}
+
+@font-face {
+  font-family: QCF_P126;
+  src: url(../app/fonts/QCF_P126.TTF);
+}
+
+.QCF_P126 {
+  font-family: QCF_P126;
+}
+
+@font-face {
+  font-family: QCF_P127;
+  src: url(../app/fonts/QCF_P127.TTF);
+}
+
+.QCF_P127 {
+  font-family: QCF_P127;
+}
+
+@font-face {
+  font-family: QCF_P128;
+  src: url(../app/fonts/QCF_P128.TTF);
+}
+
+.QCF_P128 {
+  font-family: QCF_P128;
+}
+
+@font-face {
+  font-family: QCF_P129;
+  src: url(../app/fonts/QCF_P129.TTF);
+}
+
+.QCF_P129 {
+  font-family: QCF_P129;
+}
+
+@font-face {
+  font-family: QCF_P130;
+  src: url(../app/fonts/QCF_P130.TTF);
+}
+
+.QCF_P130 {
+  font-family: QCF_P130;
+}
+
+@font-face {
+  font-family: QCF_P131;
+  src: url(../app/fonts/QCF_P131.TTF);
+}
+
+.QCF_P131 {
+  font-family: QCF_P131;
+}
+
+@font-face {
+  font-family: QCF_P132;
+  src: url(../app/fonts/QCF_P132.TTF);
+}
+
+.QCF_P132 {
+  font-family: QCF_P132;
+}
+
+@font-face {
+  font-family: QCF_P133;
+  src: url(../app/fonts/QCF_P133.TTF);
+}
+
+.QCF_P133 {
+  font-family: QCF_P133;
+}
+
+@font-face {
+  font-family: QCF_P134;
+  src: url(../app/fonts/QCF_P134.TTF);
+}
+
+.QCF_P134 {
+  font-family: QCF_P134;
+}
+
+@font-face {
+  font-family: QCF_P135;
+  src: url(../app/fonts/QCF_P135.TTF);
+}
+
+.QCF_P135 {
+  font-family: QCF_P135;
+}
+
+@font-face {
+  font-family: QCF_P136;
+  src: url(../app/fonts/QCF_P136.TTF);
+}
+
+.QCF_P136 {
+  font-family: QCF_P136;
+}
+
+@font-face {
+  font-family: QCF_P137;
+  src: url(../app/fonts/QCF_P137.TTF);
+}
+
+.QCF_P137 {
+  font-family: QCF_P137;
+}
+
+@font-face {
+  font-family: QCF_P138;
+  src: url(../app/fonts/QCF_P138.TTF);
+}
+
+.QCF_P138 {
+  font-family: QCF_P138;
+}
+
+@font-face {
+  font-family: QCF_P139;
+  src: url(../app/fonts/QCF_P139.TTF);
+}
+
+.QCF_P139 {
+  font-family: QCF_P139;
+}
+
+@font-face {
+  font-family: QCF_P140;
+  src: url(../app/fonts/QCF_P140.TTF);
+}
+
+.QCF_P140 {
+  font-family: QCF_P140;
+}
+
+@font-face {
+  font-family: QCF_P141;
+  src: url(../app/fonts/QCF_P141.TTF);
+}
+
+.QCF_P141 {
+  font-family: QCF_P141;
+}
+
+@font-face {
+  font-family: QCF_P142;
+  src: url(../app/fonts/QCF_P142.TTF);
+}
+
+.QCF_P142 {
+  font-family: QCF_P142;
+}
+
+@font-face {
+  font-family: QCF_P143;
+  src: url(../app/fonts/QCF_P143.TTF);
+}
+
+.QCF_P143 {
+  font-family: QCF_P143;
+}
+
+@font-face {
+  font-family: QCF_P144;
+  src: url(../app/fonts/QCF_P144.TTF);
+}
+
+.QCF_P144 {
+  font-family: QCF_P144;
+}
+
+@font-face {
+  font-family: QCF_P145;
+  src: url(../app/fonts/QCF_P145.TTF);
+}
+
+.QCF_P145 {
+  font-family: QCF_P145;
+}
+
+@font-face {
+  font-family: QCF_P146;
+  src: url(../app/fonts/QCF_P146.TTF);
+}
+
+.QCF_P146 {
+  font-family: QCF_P146;
+}
+
+@font-face {
+  font-family: QCF_P147;
+  src: url(../app/fonts/QCF_P147.TTF);
+}
+
+.QCF_P147 {
+  font-family: QCF_P147;
+}
+
+@font-face {
+  font-family: QCF_P148;
+  src: url(../app/fonts/QCF_P148.TTF);
+}
+
+.QCF_P148 {
+  font-family: QCF_P148;
+}
+
+@font-face {
+  font-family: QCF_P149;
+  src: url(../app/fonts/QCF_P149.TTF);
+}
+
+.QCF_P149 {
+  font-family: QCF_P149;
+}
+
+@font-face {
+  font-family: QCF_P150;
+  src: url(../app/fonts/QCF_P150.TTF);
+}
+
+.QCF_P150 {
+  font-family: QCF_P150;
+}
+
+@font-face {
+  font-family: QCF_P151;
+  src: url(../app/fonts/QCF_P151.TTF);
+}
+
+.QCF_P151 {
+  font-family: QCF_P151;
+}
+
+@font-face {
+  font-family: QCF_P152;
+  src: url(../app/fonts/QCF_P152.TTF);
+}
+
+.QCF_P152 {
+  font-family: QCF_P152;
+}
+
+@font-face {
+  font-family: QCF_P153;
+  src: url(../app/fonts/QCF_P153.TTF);
+}
+
+.QCF_P153 {
+  font-family: QCF_P153;
+}
+
+@font-face {
+  font-family: QCF_P154;
+  src: url(../app/fonts/QCF_P154.TTF);
+}
+
+.QCF_P154 {
+  font-family: QCF_P154;
+}
+
+@font-face {
+  font-family: QCF_P155;
+  src: url(../app/fonts/QCF_P155.TTF);
+}
+
+.QCF_P155 {
+  font-family: QCF_P155;
+}
+
+@font-face {
+  font-family: QCF_P156;
+  src: url(../app/fonts/QCF_P156.TTF);
+}
+
+.QCF_P156 {
+  font-family: QCF_P156;
+}
+
+@font-face {
+  font-family: QCF_P157;
+  src: url(../app/fonts/QCF_P157.TTF);
+}
+
+.QCF_P157 {
+  font-family: QCF_P157;
+}
+
+@font-face {
+  font-family: QCF_P158;
+  src: url(../app/fonts/QCF_P158.TTF);
+}
+
+.QCF_P158 {
+  font-family: QCF_P158;
+}
+
+@font-face {
+  font-family: QCF_P159;
+  src: url(../app/fonts/QCF_P159.TTF);
+}
+
+.QCF_P159 {
+  font-family: QCF_P159;
+}
+
+@font-face {
+  font-family: QCF_P160;
+  src: url(../app/fonts/QCF_P160.TTF);
+}
+
+.QCF_P160 {
+  font-family: QCF_P160;
+}
+
+@font-face {
+  font-family: QCF_P161;
+  src: url(../app/fonts/QCF_P161.TTF);
+}
+
+.QCF_P161 {
+  font-family: QCF_P161;
+}
+
+@font-face {
+  font-family: QCF_P162;
+  src: url(../app/fonts/QCF_P162.TTF);
+}
+
+.QCF_P162 {
+  font-family: QCF_P162;
+}
+
+@font-face {
+  font-family: QCF_P163;
+  src: url(../app/fonts/QCF_P163.TTF);
+}
+
+.QCF_P163 {
+  font-family: QCF_P163;
+}
+
+@font-face {
+  font-family: QCF_P164;
+  src: url(../app/fonts/QCF_P164.TTF);
+}
+
+.QCF_P164 {
+  font-family: QCF_P164;
+}
+
+@font-face {
+  font-family: QCF_P165;
+  src: url(../app/fonts/QCF_P165.TTF);
+}
+
+.QCF_P165 {
+  font-family: QCF_P165;
+}
+
+@font-face {
+  font-family: QCF_P166;
+  src: url(../app/fonts/QCF_P166.TTF);
+}
+
+.QCF_P166 {
+  font-family: QCF_P166;
+}
+
+@font-face {
+  font-family: QCF_P167;
+  src: url(../app/fonts/QCF_P167.TTF);
+}
+
+.QCF_P167 {
+  font-family: QCF_P167;
+}
+
+@font-face {
+  font-family: QCF_P168;
+  src: url(../app/fonts/QCF_P168.TTF);
+}
+
+.QCF_P168 {
+  font-family: QCF_P168;
+}
+
+@font-face {
+  font-family: QCF_P169;
+  src: url(../app/fonts/QCF_P169.TTF);
+}
+
+.QCF_P169 {
+  font-family: QCF_P169;
+}
+
+@font-face {
+  font-family: QCF_P170;
+  src: url(../app/fonts/QCF_P170.TTF);
+}
+
+.QCF_P170 {
+  font-family: QCF_P170;
+}
+
+@font-face {
+  font-family: QCF_P171;
+  src: url(../app/fonts/QCF_P171.TTF);
+}
+
+.QCF_P171 {
+  font-family: QCF_P171;
+}
+
+@font-face {
+  font-family: QCF_P172;
+  src: url(../app/fonts/QCF_P172.TTF);
+}
+
+.QCF_P172 {
+  font-family: QCF_P172;
+}
+
+@font-face {
+  font-family: QCF_P173;
+  src: url(../app/fonts/QCF_P173.TTF);
+}
+
+.QCF_P173 {
+  font-family: QCF_P173;
+}
+
+@font-face {
+  font-family: QCF_P174;
+  src: url(../app/fonts/QCF_P174.TTF);
+}
+
+.QCF_P174 {
+  font-family: QCF_P174;
+}
+
+@font-face {
+  font-family: QCF_P175;
+  src: url(../app/fonts/QCF_P175.TTF);
+}
+
+.QCF_P175 {
+  font-family: QCF_P175;
+}
+
+@font-face {
+  font-family: QCF_P176;
+  src: url(../app/fonts/QCF_P176.TTF);
+}
+
+.QCF_P176 {
+  font-family: QCF_P176;
+}
+
+@font-face {
+  font-family: QCF_P177;
+  src: url(../app/fonts/QCF_P177.TTF);
+}
+
+.QCF_P177 {
+  font-family: QCF_P177;
+}
+
+@font-face {
+  font-family: QCF_P178;
+  src: url(../app/fonts/QCF_P178.TTF);
+}
+
+.QCF_P178 {
+  font-family: QCF_P178;
+}
+
+@font-face {
+  font-family: QCF_P179;
+  src: url(../app/fonts/QCF_P179.TTF);
+}
+
+.QCF_P179 {
+  font-family: QCF_P179;
+}
+
+@font-face {
+  font-family: QCF_P180;
+  src: url(../app/fonts/QCF_P180.TTF);
+}
+
+.QCF_P180 {
+  font-family: QCF_P180;
+}
+
+@font-face {
+  font-family: QCF_P181;
+  src: url(../app/fonts/QCF_P181.TTF);
+}
+
+.QCF_P181 {
+  font-family: QCF_P181;
+}
+
+@font-face {
+  font-family: QCF_P182;
+  src: url(../app/fonts/QCF_P182.TTF);
+}
+
+.QCF_P182 {
+  font-family: QCF_P182;
+}
+
+@font-face {
+  font-family: QCF_P183;
+  src: url(../app/fonts/QCF_P183.TTF);
+}
+
+.QCF_P183 {
+  font-family: QCF_P183;
+}
+
+@font-face {
+  font-family: QCF_P184;
+  src: url(../app/fonts/QCF_P184.TTF);
+}
+
+.QCF_P184 {
+  font-family: QCF_P184;
+}
+
+@font-face {
+  font-family: QCF_P185;
+  src: url(../app/fonts/QCF_P185.TTF);
+}
+
+.QCF_P185 {
+  font-family: QCF_P185;
+}
+
+@font-face {
+  font-family: QCF_P186;
+  src: url(../app/fonts/QCF_P186.TTF);
+}
+
+.QCF_P186 {
+  font-family: QCF_P186;
+}
+
+@font-face {
+  font-family: QCF_P187;
+  src: url(../app/fonts/QCF_P187.TTF);
+}
+
+.QCF_P187 {
+  font-family: QCF_P187;
+}
+
+@font-face {
+  font-family: QCF_P188;
+  src: url(../app/fonts/QCF_P188.TTF);
+}
+
+.QCF_P188 {
+  font-family: QCF_P188;
+}
+
+@font-face {
+  font-family: QCF_P189;
+  src: url(../app/fonts/QCF_P189.TTF);
+}
+
+.QCF_P189 {
+  font-family: QCF_P189;
+}
+
+@font-face {
+  font-family: QCF_P190;
+  src: url(../app/fonts/QCF_P190.TTF);
+}
+
+.QCF_P190 {
+  font-family: QCF_P190;
+}
+
+@font-face {
+  font-family: QCF_P191;
+  src: url(../app/fonts/QCF_P191.TTF);
+}
+
+.QCF_P191 {
+  font-family: QCF_P191;
+}
+
+@font-face {
+  font-family: QCF_P192;
+  src: url(../app/fonts/QCF_P192.TTF);
+}
+
+.QCF_P192 {
+  font-family: QCF_P192;
+}
+
+@font-face {
+  font-family: QCF_P193;
+  src: url(../app/fonts/QCF_P193.TTF);
+}
+
+.QCF_P193 {
+  font-family: QCF_P193;
+}
+
+@font-face {
+  font-family: QCF_P194;
+  src: url(../app/fonts/QCF_P194.TTF);
+}
+
+.QCF_P194 {
+  font-family: QCF_P194;
+}
+
+@font-face {
+  font-family: QCF_P195;
+  src: url(../app/fonts/QCF_P195.TTF);
+}
+
+.QCF_P195 {
+  font-family: QCF_P195;
+}
+
+@font-face {
+  font-family: QCF_P196;
+  src: url(../app/fonts/QCF_P196.TTF);
+}
+
+.QCF_P196 {
+  font-family: QCF_P196;
+}
+
+@font-face {
+  font-family: QCF_P197;
+  src: url(../app/fonts/QCF_P197.TTF);
+}
+
+.QCF_P197 {
+  font-family: QCF_P197;
+}
+
+@font-face {
+  font-family: QCF_P198;
+  src: url(../app/fonts/QCF_P198.TTF);
+}
+
+.QCF_P198 {
+  font-family: QCF_P198;
+}
+
+@font-face {
+  font-family: QCF_P199;
+  src: url(../app/fonts/QCF_P199.TTF);
+}
+
+.QCF_P199 {
+  font-family: QCF_P199;
+}
+
+@font-face {
+  font-family: QCF_P200;
+  src: url(../app/fonts/QCF_P200.TTF);
+}
+
+.QCF_P200 {
+  font-family: QCF_P200;
+}
+
+@font-face {
+  font-family: QCF_P201;
+  src: url(../app/fonts/QCF_P201.TTF);
+}
+
+.QCF_P201 {
+  font-family: QCF_P201;
+}
+
+@font-face {
+  font-family: QCF_P202;
+  src: url(../app/fonts/QCF_P202.TTF);
+}
+
+.QCF_P202 {
+  font-family: QCF_P202;
+}
+
+@font-face {
+  font-family: QCF_P203;
+  src: url(../app/fonts/QCF_P203.TTF);
+}
+
+.QCF_P203 {
+  font-family: QCF_P203;
+}
+
+@font-face {
+  font-family: QCF_P204;
+  src: url(../app/fonts/QCF_P204.TTF);
+}
+
+.QCF_P204 {
+  font-family: QCF_P204;
+}
+
+@font-face {
+  font-family: QCF_P205;
+  src: url(../app/fonts/QCF_P205.TTF);
+}
+
+.QCF_P205 {
+  font-family: QCF_P205;
+}
+
+@font-face {
+  font-family: QCF_P206;
+  src: url(../app/fonts/QCF_P206.TTF);
+}
+
+.QCF_P206 {
+  font-family: QCF_P206;
+}
+
+@font-face {
+  font-family: QCF_P207;
+  src: url(../app/fonts/QCF_P207.TTF);
+}
+
+.QCF_P207 {
+  font-family: QCF_P207;
+}
+
+@font-face {
+  font-family: QCF_P208;
+  src: url(../app/fonts/QCF_P208.TTF);
+}
+
+.QCF_P208 {
+  font-family: QCF_P208;
+}
+
+@font-face {
+  font-family: QCF_P209;
+  src: url(../app/fonts/QCF_P209.TTF);
+}
+
+.QCF_P209 {
+  font-family: QCF_P209;
+}
+
+@font-face {
+  font-family: QCF_P210;
+  src: url(../app/fonts/QCF_P210.TTF);
+}
+
+.QCF_P210 {
+  font-family: QCF_P210;
+}
+
+@font-face {
+  font-family: QCF_P211;
+  src: url(../app/fonts/QCF_P211.TTF);
+}
+
+.QCF_P211 {
+  font-family: QCF_P211;
+}
+
+@font-face {
+  font-family: QCF_P212;
+  src: url(../app/fonts/QCF_P212.TTF);
+}
+
+.QCF_P212 {
+  font-family: QCF_P212;
+}
+
+@font-face {
+  font-family: QCF_P213;
+  src: url(../app/fonts/QCF_P213.TTF);
+}
+
+.QCF_P213 {
+  font-family: QCF_P213;
+}
+
+@font-face {
+  font-family: QCF_P214;
+  src: url(../app/fonts/QCF_P214.TTF);
+}
+
+.QCF_P214 {
+  font-family: QCF_P214;
+}
+
+@font-face {
+  font-family: QCF_P215;
+  src: url(../app/fonts/QCF_P215.TTF);
+}
+
+.QCF_P215 {
+  font-family: QCF_P215;
+}
+
+@font-face {
+  font-family: QCF_P216;
+  src: url(../app/fonts/QCF_P216.TTF);
+}
+
+.QCF_P216 {
+  font-family: QCF_P216;
+}
+
+@font-face {
+  font-family: QCF_P217;
+  src: url(../app/fonts/QCF_P217.TTF);
+}
+
+.QCF_P217 {
+  font-family: QCF_P217;
+}
+
+@font-face {
+  font-family: QCF_P218;
+  src: url(../app/fonts/QCF_P218.TTF);
+}
+
+.QCF_P218 {
+  font-family: QCF_P218;
+}
+
+@font-face {
+  font-family: QCF_P219;
+  src: url(../app/fonts/QCF_P219.TTF);
+}
+
+.QCF_P219 {
+  font-family: QCF_P219;
+}
+
+@font-face {
+  font-family: QCF_P220;
+  src: url(../app/fonts/QCF_P220.TTF);
+}
+
+.QCF_P220 {
+  font-family: QCF_P220;
+}
+
+@font-face {
+  font-family: QCF_P221;
+  src: url(../app/fonts/QCF_P221.TTF);
+}
+
+.QCF_P221 {
+  font-family: QCF_P221;
+}
+
+@font-face {
+  font-family: QCF_P222;
+  src: url(../app/fonts/QCF_P222.TTF);
+}
+
+.QCF_P222 {
+  font-family: QCF_P222;
+}
+
+@font-face {
+  font-family: QCF_P223;
+  src: url(../app/fonts/QCF_P223.TTF);
+}
+
+.QCF_P223 {
+  font-family: QCF_P223;
+}
+
+@font-face {
+  font-family: QCF_P224;
+  src: url(../app/fonts/QCF_P224.TTF);
+}
+
+.QCF_P224 {
+  font-family: QCF_P224;
+}
+
+@font-face {
+  font-family: QCF_P225;
+  src: url(../app/fonts/QCF_P225.TTF);
+}
+
+.QCF_P225 {
+  font-family: QCF_P225;
+}
+
+@font-face {
+  font-family: QCF_P226;
+  src: url(../app/fonts/QCF_P226.TTF);
+}
+
+.QCF_P226 {
+  font-family: QCF_P226;
+}
+
+@font-face {
+  font-family: QCF_P227;
+  src: url(../app/fonts/QCF_P227.TTF);
+}
+
+.QCF_P227 {
+  font-family: QCF_P227;
+}
+
+@font-face {
+  font-family: QCF_P228;
+  src: url(../app/fonts/QCF_P228.TTF);
+}
+
+.QCF_P228 {
+  font-family: QCF_P228;
+}
+
+@font-face {
+  font-family: QCF_P229;
+  src: url(../app/fonts/QCF_P229.TTF);
+}
+
+.QCF_P229 {
+  font-family: QCF_P229;
+}
+
+@font-face {
+  font-family: QCF_P230;
+  src: url(../app/fonts/QCF_P230.TTF);
+}
+
+.QCF_P230 {
+  font-family: QCF_P230;
+}
+
+@font-face {
+  font-family: QCF_P231;
+  src: url(../app/fonts/QCF_P231.TTF);
+}
+
+.QCF_P231 {
+  font-family: QCF_P231;
+}
+
+@font-face {
+  font-family: QCF_P232;
+  src: url(../app/fonts/QCF_P232.TTF);
+}
+
+.QCF_P232 {
+  font-family: QCF_P232;
+}
+
+@font-face {
+  font-family: QCF_P233;
+  src: url(../app/fonts/QCF_P233.TTF);
+}
+
+.QCF_P233 {
+  font-family: QCF_P233;
+}
+
+@font-face {
+  font-family: QCF_P234;
+  src: url(../app/fonts/QCF_P234.TTF);
+}
+
+.QCF_P234 {
+  font-family: QCF_P234;
+}
+
+@font-face {
+  font-family: QCF_P235;
+  src: url(../app/fonts/QCF_P235.TTF);
+}
+
+.QCF_P235 {
+  font-family: QCF_P235;
+}
+
+@font-face {
+  font-family: QCF_P236;
+  src: url(../app/fonts/QCF_P236.TTF);
+}
+
+.QCF_P236 {
+  font-family: QCF_P236;
+}
+
+@font-face {
+  font-family: QCF_P237;
+  src: url(../app/fonts/QCF_P237.TTF);
+}
+
+.QCF_P237 {
+  font-family: QCF_P237;
+}
+
+@font-face {
+  font-family: QCF_P238;
+  src: url(../app/fonts/QCF_P238.TTF);
+}
+
+.QCF_P238 {
+  font-family: QCF_P238;
+}
+
+@font-face {
+  font-family: QCF_P239;
+  src: url(../app/fonts/QCF_P239.TTF);
+}
+
+.QCF_P239 {
+  font-family: QCF_P239;
+}
+
+@font-face {
+  font-family: QCF_P240;
+  src: url(../app/fonts/QCF_P240.TTF);
+}
+
+.QCF_P240 {
+  font-family: QCF_P240;
+}
+
+@font-face {
+  font-family: QCF_P241;
+  src: url(../app/fonts/QCF_P241.TTF);
+}
+
+.QCF_P241 {
+  font-family: QCF_P241;
+}
+
+@font-face {
+  font-family: QCF_P242;
+  src: url(../app/fonts/QCF_P242.TTF);
+}
+
+.QCF_P242 {
+  font-family: QCF_P242;
+}
+
+@font-face {
+  font-family: QCF_P243;
+  src: url(../app/fonts/QCF_P243.TTF);
+}
+
+.QCF_P243 {
+  font-family: QCF_P243;
+}
+
+@font-face {
+  font-family: QCF_P244;
+  src: url(../app/fonts/QCF_P244.TTF);
+}
+
+.QCF_P244 {
+  font-family: QCF_P244;
+}
+
+@font-face {
+  font-family: QCF_P245;
+  src: url(../app/fonts/QCF_P245.TTF);
+}
+
+.QCF_P245 {
+  font-family: QCF_P245;
+}
+
+@font-face {
+  font-family: QCF_P246;
+  src: url(../app/fonts/QCF_P246.TTF);
+}
+
+.QCF_P246 {
+  font-family: QCF_P246;
+}
+
+@font-face {
+  font-family: QCF_P247;
+  src: url(../app/fonts/QCF_P247.TTF);
+}
+
+.QCF_P247 {
+  font-family: QCF_P247;
+}
+
+@font-face {
+  font-family: QCF_P248;
+  src: url(../app/fonts/QCF_P248.TTF);
+}
+
+.QCF_P248 {
+  font-family: QCF_P248;
+}
+
+@font-face {
+  font-family: QCF_P249;
+  src: url(../app/fonts/QCF_P249.TTF);
+}
+
+.QCF_P249 {
+  font-family: QCF_P249;
+}
+
+@font-face {
+  font-family: QCF_P250;
+  src: url(../app/fonts/QCF_P250.TTF);
+}
+
+.QCF_P250 {
+  font-family: QCF_P250;
+}
+
+@font-face {
+  font-family: QCF_P251;
+  src: url(../app/fonts/QCF_P251.TTF);
+}
+
+.QCF_P251 {
+  font-family: QCF_P251;
+}
+
+@font-face {
+  font-family: QCF_P252;
+  src: url(../app/fonts/QCF_P252.TTF);
+}
+
+.QCF_P252 {
+  font-family: QCF_P252;
+}
+
+@font-face {
+  font-family: QCF_P253;
+  src: url(../app/fonts/QCF_P253.TTF);
+}
+
+.QCF_P253 {
+  font-family: QCF_P253;
+}
+
+@font-face {
+  font-family: QCF_P254;
+  src: url(../app/fonts/QCF_P254.TTF);
+}
+
+.QCF_P254 {
+  font-family: QCF_P254;
+}
+
+@font-face {
+  font-family: QCF_P255;
+  src: url(../app/fonts/QCF_P255.TTF);
+}
+
+.QCF_P255 {
+  font-family: QCF_P255;
+}
+
+@font-face {
+  font-family: QCF_P256;
+  src: url(../app/fonts/QCF_P256.TTF);
+}
+
+.QCF_P256 {
+  font-family: QCF_P256;
+}
+
+@font-face {
+  font-family: QCF_P257;
+  src: url(../app/fonts/QCF_P257.TTF);
+}
+
+.QCF_P257 {
+  font-family: QCF_P257;
+}
+
+@font-face {
+  font-family: QCF_P258;
+  src: url(../app/fonts/QCF_P258.TTF);
+}
+
+.QCF_P258 {
+  font-family: QCF_P258;
+}
+
+@font-face {
+  font-family: QCF_P259;
+  src: url(../app/fonts/QCF_P259.TTF);
+}
+
+.QCF_P259 {
+  font-family: QCF_P259;
+}
+
+@font-face {
+  font-family: QCF_P260;
+  src: url(../app/fonts/QCF_P260.TTF);
+}
+
+.QCF_P260 {
+  font-family: QCF_P260;
+}
+
+@font-face {
+  font-family: QCF_P261;
+  src: url(../app/fonts/QCF_P261.TTF);
+}
+
+.QCF_P261 {
+  font-family: QCF_P261;
+}
+
+@font-face {
+  font-family: QCF_P262;
+  src: url(../app/fonts/QCF_P262.TTF);
+}
+
+.QCF_P262 {
+  font-family: QCF_P262;
+}
+
+@font-face {
+  font-family: QCF_P263;
+  src: url(../app/fonts/QCF_P263.TTF);
+}
+
+.QCF_P263 {
+  font-family: QCF_P263;
+}
+
+@font-face {
+  font-family: QCF_P264;
+  src: url(../app/fonts/QCF_P264.TTF);
+}
+
+.QCF_P264 {
+  font-family: QCF_P264;
+}
+
+@font-face {
+  font-family: QCF_P265;
+  src: url(../app/fonts/QCF_P265.TTF);
+}
+
+.QCF_P265 {
+  font-family: QCF_P265;
+}
+
+@font-face {
+  font-family: QCF_P266;
+  src: url(../app/fonts/QCF_P266.TTF);
+}
+
+.QCF_P266 {
+  font-family: QCF_P266;
+}
+
+@font-face {
+  font-family: QCF_P267;
+  src: url(../app/fonts/QCF_P267.TTF);
+}
+
+.QCF_P267 {
+  font-family: QCF_P267;
+}
+
+@font-face {
+  font-family: QCF_P268;
+  src: url(../app/fonts/QCF_P268.TTF);
+}
+
+.QCF_P268 {
+  font-family: QCF_P268;
+}
+
+@font-face {
+  font-family: QCF_P269;
+  src: url(../app/fonts/QCF_P269.TTF);
+}
+
+.QCF_P269 {
+  font-family: QCF_P269;
+}
+
+@font-face {
+  font-family: QCF_P270;
+  src: url(../app/fonts/QCF_P270.TTF);
+}
+
+.QCF_P270 {
+  font-family: QCF_P270;
+}
+
+@font-face {
+  font-family: QCF_P271;
+  src: url(../app/fonts/QCF_P271.TTF);
+}
+
+.QCF_P271 {
+  font-family: QCF_P271;
+}
+
+@font-face {
+  font-family: QCF_P272;
+  src: url(../app/fonts/QCF_P272.TTF);
+}
+
+.QCF_P272 {
+  font-family: QCF_P272;
+}
+
+@font-face {
+  font-family: QCF_P273;
+  src: url(../app/fonts/QCF_P273.TTF);
+}
+
+.QCF_P273 {
+  font-family: QCF_P273;
+}
+
+@font-face {
+  font-family: QCF_P274;
+  src: url(../app/fonts/QCF_P274.TTF);
+}
+
+.QCF_P274 {
+  font-family: QCF_P274;
+}
+
+@font-face {
+  font-family: QCF_P275;
+  src: url(../app/fonts/QCF_P275.TTF);
+}
+
+.QCF_P275 {
+  font-family: QCF_P275;
+}
+
+@font-face {
+  font-family: QCF_P276;
+  src: url(../app/fonts/QCF_P276.TTF);
+}
+
+.QCF_P276 {
+  font-family: QCF_P276;
+}
+
+@font-face {
+  font-family: QCF_P277;
+  src: url(../app/fonts/QCF_P277.TTF);
+}
+
+.QCF_P277 {
+  font-family: QCF_P277;
+}
+
+@font-face {
+  font-family: QCF_P278;
+  src: url(../app/fonts/QCF_P278.TTF);
+}
+
+.QCF_P278 {
+  font-family: QCF_P278;
+}
+
+@font-face {
+  font-family: QCF_P279;
+  src: url(../app/fonts/QCF_P279.TTF);
+}
+
+.QCF_P279 {
+  font-family: QCF_P279;
+}
+
+@font-face {
+  font-family: QCF_P280;
+  src: url(../app/fonts/QCF_P280.TTF);
+}
+
+.QCF_P280 {
+  font-family: QCF_P280;
+}
+
+@font-face {
+  font-family: QCF_P281;
+  src: url(../app/fonts/QCF_P281.TTF);
+}
+
+.QCF_P281 {
+  font-family: QCF_P281;
+}
+
+@font-face {
+  font-family: QCF_P282;
+  src: url(../app/fonts/QCF_P282.TTF);
+}
+
+.QCF_P282 {
+  font-family: QCF_P282;
+}
+
+@font-face {
+  font-family: QCF_P283;
+  src: url(../app/fonts/QCF_P283.TTF);
+}
+
+.QCF_P283 {
+  font-family: QCF_P283;
+}
+
+@font-face {
+  font-family: QCF_P284;
+  src: url(../app/fonts/QCF_P284.TTF);
+}
+
+.QCF_P284 {
+  font-family: QCF_P284;
+}
+
+@font-face {
+  font-family: QCF_P285;
+  src: url(../app/fonts/QCF_P285.TTF);
+}
+
+.QCF_P285 {
+  font-family: QCF_P285;
+}
+
+@font-face {
+  font-family: QCF_P286;
+  src: url(../app/fonts/QCF_P286.TTF);
+}
+
+.QCF_P286 {
+  font-family: QCF_P286;
+}
+
+@font-face {
+  font-family: QCF_P287;
+  src: url(../app/fonts/QCF_P287.TTF);
+}
+
+.QCF_P287 {
+  font-family: QCF_P287;
+}
+
+@font-face {
+  font-family: QCF_P288;
+  src: url(../app/fonts/QCF_P288.TTF);
+}
+
+.QCF_P288 {
+  font-family: QCF_P288;
+}
+
+@font-face {
+  font-family: QCF_P289;
+  src: url(../app/fonts/QCF_P289.TTF);
+}
+
+.QCF_P289 {
+  font-family: QCF_P289;
+}
+
+@font-face {
+  font-family: QCF_P290;
+  src: url(../app/fonts/QCF_P290.TTF);
+}
+
+.QCF_P290 {
+  font-family: QCF_P290;
+}
+
+@font-face {
+  font-family: QCF_P291;
+  src: url(../app/fonts/QCF_P291.TTF);
+}
+
+.QCF_P291 {
+  font-family: QCF_P291;
+}
+
+@font-face {
+  font-family: QCF_P292;
+  src: url(../app/fonts/QCF_P292.TTF);
+}
+
+.QCF_P292 {
+  font-family: QCF_P292;
+}
+
+@font-face {
+  font-family: QCF_P293;
+  src: url(../app/fonts/QCF_P293.TTF);
+}
+
+.QCF_P293 {
+  font-family: QCF_P293;
+}
+
+@font-face {
+  font-family: QCF_P294;
+  src: url(../app/fonts/QCF_P294.TTF);
+}
+
+.QCF_P294 {
+  font-family: QCF_P294;
+}
+
+@font-face {
+  font-family: QCF_P295;
+  src: url(../app/fonts/QCF_P295.TTF);
+}
+
+.QCF_P295 {
+  font-family: QCF_P295;
+}
+
+@font-face {
+  font-family: QCF_P296;
+  src: url(../app/fonts/QCF_P296.TTF);
+}
+
+.QCF_P296 {
+  font-family: QCF_P296;
+}
+
+@font-face {
+  font-family: QCF_P297;
+  src: url(../app/fonts/QCF_P297.TTF);
+}
+
+.QCF_P297 {
+  font-family: QCF_P297;
+}
+
+@font-face {
+  font-family: QCF_P298;
+  src: url(../app/fonts/QCF_P298.TTF);
+}
+
+.QCF_P298 {
+  font-family: QCF_P298;
+}
+
+@font-face {
+  font-family: QCF_P299;
+  src: url(../app/fonts/QCF_P299.TTF);
+}
+
+.QCF_P299 {
+  font-family: QCF_P299;
+}
+
+@font-face {
+  font-family: QCF_P300;
+  src: url(../app/fonts/QCF_P300.TTF);
+}
+
+.QCF_P300 {
+  font-family: QCF_P300;
+}
+
+@font-face {
+  font-family: QCF_P301;
+  src: url(../app/fonts/QCF_P301.TTF);
+}
+
+.QCF_P301 {
+  font-family: QCF_P301;
+}
+
+@font-face {
+  font-family: QCF_P302;
+  src: url(../app/fonts/QCF_P302.TTF);
+}
+
+.QCF_P302 {
+  font-family: QCF_P302;
+}
+
+@font-face {
+  font-family: QCF_P303;
+  src: url(../app/fonts/QCF_P303.TTF);
+}
+
+.QCF_P303 {
+  font-family: QCF_P303;
+}
+
+@font-face {
+  font-family: QCF_P304;
+  src: url(../app/fonts/QCF_P304.TTF);
+}
+
+.QCF_P304 {
+  font-family: QCF_P304;
+}
+
+@font-face {
+  font-family: QCF_P305;
+  src: url(../app/fonts/QCF_P305.TTF);
+}
+
+.QCF_P305 {
+  font-family: QCF_P305;
+}
+
+@font-face {
+  font-family: QCF_P306;
+  src: url(../app/fonts/QCF_P306.TTF);
+}
+
+.QCF_P306 {
+  font-family: QCF_P306;
+}
+
+@font-face {
+  font-family: QCF_P307;
+  src: url(../app/fonts/QCF_P307.TTF);
+}
+
+.QCF_P307 {
+  font-family: QCF_P307;
+}
+
+@font-face {
+  font-family: QCF_P308;
+  src: url(../app/fonts/QCF_P308.TTF);
+}
+
+.QCF_P308 {
+  font-family: QCF_P308;
+}
+
+@font-face {
+  font-family: QCF_P309;
+  src: url(../app/fonts/QCF_P309.TTF);
+}
+
+.QCF_P309 {
+  font-family: QCF_P309;
+}
+
+@font-face {
+  font-family: QCF_P310;
+  src: url(../app/fonts/QCF_P310.TTF);
+}
+
+.QCF_P310 {
+  font-family: QCF_P310;
+}
+
+@font-face {
+  font-family: QCF_P311;
+  src: url(../app/fonts/QCF_P311.TTF);
+}
+
+.QCF_P311 {
+  font-family: QCF_P311;
+}
+
+@font-face {
+  font-family: QCF_P312;
+  src: url(../app/fonts/QCF_P312.TTF);
+}
+
+.QCF_P312 {
+  font-family: QCF_P312;
+}
+
+@font-face {
+  font-family: QCF_P313;
+  src: url(../app/fonts/QCF_P313.TTF);
+}
+
+.QCF_P313 {
+  font-family: QCF_P313;
+}
+
+@font-face {
+  font-family: QCF_P314;
+  src: url(../app/fonts/QCF_P314.TTF);
+}
+
+.QCF_P314 {
+  font-family: QCF_P314;
+}
+
+@font-face {
+  font-family: QCF_P315;
+  src: url(../app/fonts/QCF_P315.TTF);
+}
+
+.QCF_P315 {
+  font-family: QCF_P315;
+}
+
+@font-face {
+  font-family: QCF_P316;
+  src: url(../app/fonts/QCF_P316.TTF);
+}
+
+.QCF_P316 {
+  font-family: QCF_P316;
+}
+
+@font-face {
+  font-family: QCF_P317;
+  src: url(../app/fonts/QCF_P317.TTF);
+}
+
+.QCF_P317 {
+  font-family: QCF_P317;
+}
+
+@font-face {
+  font-family: QCF_P318;
+  src: url(../app/fonts/QCF_P318.TTF);
+}
+
+.QCF_P318 {
+  font-family: QCF_P318;
+}
+
+@font-face {
+  font-family: QCF_P319;
+  src: url(../app/fonts/QCF_P319.TTF);
+}
+
+.QCF_P319 {
+  font-family: QCF_P319;
+}
+
+@font-face {
+  font-family: QCF_P320;
+  src: url(../app/fonts/QCF_P320.TTF);
+}
+
+.QCF_P320 {
+  font-family: QCF_P320;
+}
+
+@font-face {
+  font-family: QCF_P321;
+  src: url(../app/fonts/QCF_P321.TTF);
+}
+
+.QCF_P321 {
+  font-family: QCF_P321;
+}
+
+@font-face {
+  font-family: QCF_P322;
+  src: url(../app/fonts/QCF_P322.TTF);
+}
+
+.QCF_P322 {
+  font-family: QCF_P322;
+}
+
+@font-face {
+  font-family: QCF_P323;
+  src: url(../app/fonts/QCF_P323.TTF);
+}
+
+.QCF_P323 {
+  font-family: QCF_P323;
+}
+
+@font-face {
+  font-family: QCF_P324;
+  src: url(../app/fonts/QCF_P324.TTF);
+}
+
+.QCF_P324 {
+  font-family: QCF_P324;
+}
+
+@font-face {
+  font-family: QCF_P325;
+  src: url(../app/fonts/QCF_P325.TTF);
+}
+
+.QCF_P325 {
+  font-family: QCF_P325;
+}
+
+@font-face {
+  font-family: QCF_P326;
+  src: url(../app/fonts/QCF_P326.TTF);
+}
+
+.QCF_P326 {
+  font-family: QCF_P326;
+}
+
+@font-face {
+  font-family: QCF_P327;
+  src: url(../app/fonts/QCF_P327.TTF);
+}
+
+.QCF_P327 {
+  font-family: QCF_P327;
+}
+
+@font-face {
+  font-family: QCF_P328;
+  src: url(../app/fonts/QCF_P328.TTF);
+}
+
+.QCF_P328 {
+  font-family: QCF_P328;
+}
+
+@font-face {
+  font-family: QCF_P329;
+  src: url(../app/fonts/QCF_P329.TTF);
+}
+
+.QCF_P329 {
+  font-family: QCF_P329;
+}
+
+@font-face {
+  font-family: QCF_P330;
+  src: url(../app/fonts/QCF_P330.TTF);
+}
+
+.QCF_P330 {
+  font-family: QCF_P330;
+}
+
+@font-face {
+  font-family: QCF_P331;
+  src: url(../app/fonts/QCF_P331.TTF);
+}
+
+.QCF_P331 {
+  font-family: QCF_P331;
+}
+
+@font-face {
+  font-family: QCF_P332;
+  src: url(../app/fonts/QCF_P332.TTF);
+}
+
+.QCF_P332 {
+  font-family: QCF_P332;
+}
+
+@font-face {
+  font-family: QCF_P333;
+  src: url(../app/fonts/QCF_P333.TTF);
+}
+
+.QCF_P333 {
+  font-family: QCF_P333;
+}
+
+@font-face {
+  font-family: QCF_P334;
+  src: url(../app/fonts/QCF_P334.TTF);
+}
+
+.QCF_P334 {
+  font-family: QCF_P334;
+}
+
+@font-face {
+  font-family: QCF_P335;
+  src: url(../app/fonts/QCF_P335.TTF);
+}
+
+.QCF_P335 {
+  font-family: QCF_P335;
+}
+
+@font-face {
+  font-family: QCF_P336;
+  src: url(../app/fonts/QCF_P336.TTF);
+}
+
+.QCF_P336 {
+  font-family: QCF_P336;
+}
+
+@font-face {
+  font-family: QCF_P337;
+  src: url(../app/fonts/QCF_P337.TTF);
+}
+
+.QCF_P337 {
+  font-family: QCF_P337;
+}
+
+@font-face {
+  font-family: QCF_P338;
+  src: url(../app/fonts/QCF_P338.TTF);
+}
+
+.QCF_P338 {
+  font-family: QCF_P338;
+}
+
+@font-face {
+  font-family: QCF_P339;
+  src: url(../app/fonts/QCF_P339.TTF);
+}
+
+.QCF_P339 {
+  font-family: QCF_P339;
+}
+
+@font-face {
+  font-family: QCF_P340;
+  src: url(../app/fonts/QCF_P340.TTF);
+}
+
+.QCF_P340 {
+  font-family: QCF_P340;
+}
+
+@font-face {
+  font-family: QCF_P341;
+  src: url(../app/fonts/QCF_P341.TTF);
+}
+
+.QCF_P341 {
+  font-family: QCF_P341;
+}
+
+@font-face {
+  font-family: QCF_P342;
+  src: url(../app/fonts/QCF_P342.TTF);
+}
+
+.QCF_P342 {
+  font-family: QCF_P342;
+}
+
+@font-face {
+  font-family: QCF_P343;
+  src: url(../app/fonts/QCF_P343.TTF);
+}
+
+.QCF_P343 {
+  font-family: QCF_P343;
+}
+
+@font-face {
+  font-family: QCF_P344;
+  src: url(../app/fonts/QCF_P344.TTF);
+}
+
+.QCF_P344 {
+  font-family: QCF_P344;
+}
+
+@font-face {
+  font-family: QCF_P345;
+  src: url(../app/fonts/QCF_P345.TTF);
+}
+
+.QCF_P345 {
+  font-family: QCF_P345;
+}
+
+@font-face {
+  font-family: QCF_P346;
+  src: url(../app/fonts/QCF_P346.TTF);
+}
+
+.QCF_P346 {
+  font-family: QCF_P346;
+}
+
+@font-face {
+  font-family: QCF_P347;
+  src: url(../app/fonts/QCF_P347.TTF);
+}
+
+.QCF_P347 {
+  font-family: QCF_P347;
+}
+
+@font-face {
+  font-family: QCF_P348;
+  src: url(../app/fonts/QCF_P348.TTF);
+}
+
+.QCF_P348 {
+  font-family: QCF_P348;
+}
+
+@font-face {
+  font-family: QCF_P349;
+  src: url(../app/fonts/QCF_P349.TTF);
+}
+
+.QCF_P349 {
+  font-family: QCF_P349;
+}
+
+@font-face {
+  font-family: QCF_P350;
+  src: url(../app/fonts/QCF_P350.TTF);
+}
+
+.QCF_P350 {
+  font-family: QCF_P350;
+}
+
+@font-face {
+  font-family: QCF_P351;
+  src: url(../app/fonts/QCF_P351.TTF);
+}
+
+.QCF_P351 {
+  font-family: QCF_P351;
+}
+
+@font-face {
+  font-family: QCF_P352;
+  src: url(../app/fonts/QCF_P352.TTF);
+}
+
+.QCF_P352 {
+  font-family: QCF_P352;
+}
+
+@font-face {
+  font-family: QCF_P353;
+  src: url(../app/fonts/QCF_P353.TTF);
+}
+
+.QCF_P353 {
+  font-family: QCF_P353;
+}
+
+@font-face {
+  font-family: QCF_P354;
+  src: url(../app/fonts/QCF_P354.TTF);
+}
+
+.QCF_P354 {
+  font-family: QCF_P354;
+}
+
+@font-face {
+  font-family: QCF_P355;
+  src: url(../app/fonts/QCF_P355.TTF);
+}
+
+.QCF_P355 {
+  font-family: QCF_P355;
+}
+
+@font-face {
+  font-family: QCF_P356;
+  src: url(../app/fonts/QCF_P356.TTF);
+}
+
+.QCF_P356 {
+  font-family: QCF_P356;
+}
+
+@font-face {
+  font-family: QCF_P357;
+  src: url(../app/fonts/QCF_P357.TTF);
+}
+
+.QCF_P357 {
+  font-family: QCF_P357;
+}
+
+@font-face {
+  font-family: QCF_P358;
+  src: url(../app/fonts/QCF_P358.TTF);
+}
+
+.QCF_P358 {
+  font-family: QCF_P358;
+}
+
+@font-face {
+  font-family: QCF_P359;
+  src: url(../app/fonts/QCF_P359.TTF);
+}
+
+.QCF_P359 {
+  font-family: QCF_P359;
+}
+
+@font-face {
+  font-family: QCF_P360;
+  src: url(../app/fonts/QCF_P360.TTF);
+}
+
+.QCF_P360 {
+  font-family: QCF_P360;
+}
+
+@font-face {
+  font-family: QCF_P361;
+  src: url(../app/fonts/QCF_P361.TTF);
+}
+
+.QCF_P361 {
+  font-family: QCF_P361;
+}
+
+@font-face {
+  font-family: QCF_P362;
+  src: url(../app/fonts/QCF_P362.TTF);
+}
+
+.QCF_P362 {
+  font-family: QCF_P362;
+}
+
+@font-face {
+  font-family: QCF_P363;
+  src: url(../app/fonts/QCF_P363.TTF);
+}
+
+.QCF_P363 {
+  font-family: QCF_P363;
+}
+
+@font-face {
+  font-family: QCF_P364;
+  src: url(../app/fonts/QCF_P364.TTF);
+}
+
+.QCF_P364 {
+  font-family: QCF_P364;
+}
+
+@font-face {
+  font-family: QCF_P365;
+  src: url(../app/fonts/QCF_P365.TTF);
+}
+
+.QCF_P365 {
+  font-family: QCF_P365;
+}
+
+@font-face {
+  font-family: QCF_P366;
+  src: url(../app/fonts/QCF_P366.TTF);
+}
+
+.QCF_P366 {
+  font-family: QCF_P366;
+}
+
+@font-face {
+  font-family: QCF_P367;
+  src: url(../app/fonts/QCF_P367.TTF);
+}
+
+.QCF_P367 {
+  font-family: QCF_P367;
+}
+
+@font-face {
+  font-family: QCF_P368;
+  src: url(../app/fonts/QCF_P368.TTF);
+}
+
+.QCF_P368 {
+  font-family: QCF_P368;
+}
+
+@font-face {
+  font-family: QCF_P369;
+  src: url(../app/fonts/QCF_P369.TTF);
+}
+
+.QCF_P369 {
+  font-family: QCF_P369;
+}
+
+@font-face {
+  font-family: QCF_P370;
+  src: url(../app/fonts/QCF_P370.TTF);
+}
+
+.QCF_P370 {
+  font-family: QCF_P370;
+}
+
+@font-face {
+  font-family: QCF_P371;
+  src: url(../app/fonts/QCF_P371.TTF);
+}
+
+.QCF_P371 {
+  font-family: QCF_P371;
+}
+
+@font-face {
+  font-family: QCF_P372;
+  src: url(../app/fonts/QCF_P372.TTF);
+}
+
+.QCF_P372 {
+  font-family: QCF_P372;
+}
+
+@font-face {
+  font-family: QCF_P373;
+  src: url(../app/fonts/QCF_P373.TTF);
+}
+
+.QCF_P373 {
+  font-family: QCF_P373;
+}
+
+@font-face {
+  font-family: QCF_P374;
+  src: url(../app/fonts/QCF_P374.TTF);
+}
+
+.QCF_P374 {
+  font-family: QCF_P374;
+}
+
+@font-face {
+  font-family: QCF_P375;
+  src: url(../app/fonts/QCF_P375.TTF);
+}
+
+.QCF_P375 {
+  font-family: QCF_P375;
+}
+
+@font-face {
+  font-family: QCF_P376;
+  src: url(../app/fonts/QCF_P376.TTF);
+}
+
+.QCF_P376 {
+  font-family: QCF_P376;
+}
+
+@font-face {
+  font-family: QCF_P377;
+  src: url(../app/fonts/QCF_P377.TTF);
+}
+
+.QCF_P377 {
+  font-family: QCF_P377;
+}
+
+@font-face {
+  font-family: QCF_P378;
+  src: url(../app/fonts/QCF_P378.TTF);
+}
+
+.QCF_P378 {
+  font-family: QCF_P378;
+}
+
+@font-face {
+  font-family: QCF_P379;
+  src: url(../app/fonts/QCF_P379.TTF);
+}
+
+.QCF_P379 {
+  font-family: QCF_P379;
+}
+
+@font-face {
+  font-family: QCF_P380;
+  src: url(../app/fonts/QCF_P380.TTF);
+}
+
+.QCF_P380 {
+  font-family: QCF_P380;
+}
+
+@font-face {
+  font-family: QCF_P381;
+  src: url(../app/fonts/QCF_P381.TTF);
+}
+
+.QCF_P381 {
+  font-family: QCF_P381;
+}
+
+@font-face {
+  font-family: QCF_P382;
+  src: url(../app/fonts/QCF_P382.TTF);
+}
+
+.QCF_P382 {
+  font-family: QCF_P382;
+}
+
+@font-face {
+  font-family: QCF_P383;
+  src: url(../app/fonts/QCF_P383.TTF);
+}
+
+.QCF_P383 {
+  font-family: QCF_P383;
+}
+
+@font-face {
+  font-family: QCF_P384;
+  src: url(../app/fonts/QCF_P384.TTF);
+}
+
+.QCF_P384 {
+  font-family: QCF_P384;
+}
+
+@font-face {
+  font-family: QCF_P385;
+  src: url(../app/fonts/QCF_P385.TTF);
+}
+
+.QCF_P385 {
+  font-family: QCF_P385;
+}
+
+@font-face {
+  font-family: QCF_P386;
+  src: url(../app/fonts/QCF_P386.TTF);
+}
+
+.QCF_P386 {
+  font-family: QCF_P386;
+}
+
+@font-face {
+  font-family: QCF_P387;
+  src: url(../app/fonts/QCF_P387.TTF);
+}
+
+.QCF_P387 {
+  font-family: QCF_P387;
+}
+
+@font-face {
+  font-family: QCF_P388;
+  src: url(../app/fonts/QCF_P388.TTF);
+}
+
+.QCF_P388 {
+  font-family: QCF_P388;
+}
+
+@font-face {
+  font-family: QCF_P389;
+  src: url(../app/fonts/QCF_P389.TTF);
+}
+
+.QCF_P389 {
+  font-family: QCF_P389;
+}
+
+@font-face {
+  font-family: QCF_P390;
+  src: url(../app/fonts/QCF_P390.TTF);
+}
+
+.QCF_P390 {
+  font-family: QCF_P390;
+}
+
+@font-face {
+  font-family: QCF_P391;
+  src: url(../app/fonts/QCF_P391.TTF);
+}
+
+.QCF_P391 {
+  font-family: QCF_P391;
+}
+
+@font-face {
+  font-family: QCF_P392;
+  src: url(../app/fonts/QCF_P392.TTF);
+}
+
+.QCF_P392 {
+  font-family: QCF_P392;
+}
+
+@font-face {
+  font-family: QCF_P393;
+  src: url(../app/fonts/QCF_P393.TTF);
+}
+
+.QCF_P393 {
+  font-family: QCF_P393;
+}
+
+@font-face {
+  font-family: QCF_P394;
+  src: url(../app/fonts/QCF_P394.TTF);
+}
+
+.QCF_P394 {
+  font-family: QCF_P394;
+}
+
+@font-face {
+  font-family: QCF_P395;
+  src: url(../app/fonts/QCF_P395.TTF);
+}
+
+.QCF_P395 {
+  font-family: QCF_P395;
+}
+
+@font-face {
+  font-family: QCF_P396;
+  src: url(../app/fonts/QCF_P396.TTF);
+}
+
+.QCF_P396 {
+  font-family: QCF_P396;
+}
+
+@font-face {
+  font-family: QCF_P397;
+  src: url(../app/fonts/QCF_P397.TTF);
+}
+
+.QCF_P397 {
+  font-family: QCF_P397;
+}
+
+@font-face {
+  font-family: QCF_P398;
+  src: url(../app/fonts/QCF_P398.TTF);
+}
+
+.QCF_P398 {
+  font-family: QCF_P398;
+}
+
+@font-face {
+  font-family: QCF_P399;
+  src: url(../app/fonts/QCF_P399.TTF);
+}
+
+.QCF_P399 {
+  font-family: QCF_P399;
+}
+
+@font-face {
+  font-family: QCF_P400;
+  src: url(../app/fonts/QCF_P400.TTF);
+}
+
+.QCF_P400 {
+  font-family: QCF_P400;
+}
+
+@font-face {
+  font-family: QCF_P401;
+  src: url(../app/fonts/QCF_P401.TTF);
+}
+
+.QCF_P401 {
+  font-family: QCF_P401;
+}
+
+@font-face {
+  font-family: QCF_P402;
+  src: url(../app/fonts/QCF_P402.TTF);
+}
+
+.QCF_P402 {
+  font-family: QCF_P402;
+}
+
+@font-face {
+  font-family: QCF_P403;
+  src: url(../app/fonts/QCF_P403.TTF);
+}
+
+.QCF_P403 {
+  font-family: QCF_P403;
+}
+
+@font-face {
+  font-family: QCF_P404;
+  src: url(../app/fonts/QCF_P404.TTF);
+}
+
+.QCF_P404 {
+  font-family: QCF_P404;
+}
+
+@font-face {
+  font-family: QCF_P405;
+  src: url(../app/fonts/QCF_P405.TTF);
+}
+
+.QCF_P405 {
+  font-family: QCF_P405;
+}
+
+@font-face {
+  font-family: QCF_P406;
+  src: url(../app/fonts/QCF_P406.TTF);
+}
+
+.QCF_P406 {
+  font-family: QCF_P406;
+}
+
+@font-face {
+  font-family: QCF_P407;
+  src: url(../app/fonts/QCF_P407.TTF);
+}
+
+.QCF_P407 {
+  font-family: QCF_P407;
+}
+
+@font-face {
+  font-family: QCF_P408;
+  src: url(../app/fonts/QCF_P408.TTF);
+}
+
+.QCF_P408 {
+  font-family: QCF_P408;
+}
+
+@font-face {
+  font-family: QCF_P409;
+  src: url(../app/fonts/QCF_P409.TTF);
+}
+
+.QCF_P409 {
+  font-family: QCF_P409;
+}
+
+@font-face {
+  font-family: QCF_P410;
+  src: url(../app/fonts/QCF_P410.TTF);
+}
+
+.QCF_P410 {
+  font-family: QCF_P410;
+}
+
+@font-face {
+  font-family: QCF_P411;
+  src: url(../app/fonts/QCF_P411.TTF);
+}
+
+.QCF_P411 {
+  font-family: QCF_P411;
+}
+
+@font-face {
+  font-family: QCF_P412;
+  src: url(../app/fonts/QCF_P412.TTF);
+}
+
+.QCF_P412 {
+  font-family: QCF_P412;
+}
+
+@font-face {
+  font-family: QCF_P413;
+  src: url(../app/fonts/QCF_P413.TTF);
+}
+
+.QCF_P413 {
+  font-family: QCF_P413;
+}
+
+@font-face {
+  font-family: QCF_P414;
+  src: url(../app/fonts/QCF_P414.TTF);
+}
+
+.QCF_P414 {
+  font-family: QCF_P414;
+}
+
+@font-face {
+  font-family: QCF_P415;
+  src: url(../app/fonts/QCF_P415.TTF);
+}
+
+.QCF_P415 {
+  font-family: QCF_P415;
+}
+
+@font-face {
+  font-family: QCF_P416;
+  src: url(../app/fonts/QCF_P416.TTF);
+}
+
+.QCF_P416 {
+  font-family: QCF_P416;
+}
+
+@font-face {
+  font-family: QCF_P417;
+  src: url(../app/fonts/QCF_P417.TTF);
+}
+
+.QCF_P417 {
+  font-family: QCF_P417;
+}
+
+@font-face {
+  font-family: QCF_P418;
+  src: url(../app/fonts/QCF_P418.TTF);
+}
+
+.QCF_P418 {
+  font-family: QCF_P418;
+}
+
+@font-face {
+  font-family: QCF_P419;
+  src: url(../app/fonts/QCF_P419.TTF);
+}
+
+.QCF_P419 {
+  font-family: QCF_P419;
+}
+
+@font-face {
+  font-family: QCF_P420;
+  src: url(../app/fonts/QCF_P420.TTF);
+}
+
+.QCF_P420 {
+  font-family: QCF_P420;
+}
+
+@font-face {
+  font-family: QCF_P421;
+  src: url(../app/fonts/QCF_P421.TTF);
+}
+
+.QCF_P421 {
+  font-family: QCF_P421;
+}
+
+@font-face {
+  font-family: QCF_P422;
+  src: url(../app/fonts/QCF_P422.TTF);
+}
+
+.QCF_P422 {
+  font-family: QCF_P422;
+}
+
+@font-face {
+  font-family: QCF_P423;
+  src: url(../app/fonts/QCF_P423.TTF);
+}
+
+.QCF_P423 {
+  font-family: QCF_P423;
+}
+
+@font-face {
+  font-family: QCF_P424;
+  src: url(../app/fonts/QCF_P424.TTF);
+}
+
+.QCF_P424 {
+  font-family: QCF_P424;
+}
+
+@font-face {
+  font-family: QCF_P425;
+  src: url(../app/fonts/QCF_P425.TTF);
+}
+
+.QCF_P425 {
+  font-family: QCF_P425;
+}
+
+@font-face {
+  font-family: QCF_P426;
+  src: url(../app/fonts/QCF_P426.TTF);
+}
+
+.QCF_P426 {
+  font-family: QCF_P426;
+}
+
+@font-face {
+  font-family: QCF_P427;
+  src: url(../app/fonts/QCF_P427.TTF);
+}
+
+.QCF_P427 {
+  font-family: QCF_P427;
+}
+
+@font-face {
+  font-family: QCF_P428;
+  src: url(../app/fonts/QCF_P428.TTF);
+}
+
+.QCF_P428 {
+  font-family: QCF_P428;
+}
+
+@font-face {
+  font-family: QCF_P429;
+  src: url(../app/fonts/QCF_P429.TTF);
+}
+
+.QCF_P429 {
+  font-family: QCF_P429;
+}
+
+@font-face {
+  font-family: QCF_P430;
+  src: url(../app/fonts/QCF_P430.TTF);
+}
+
+.QCF_P430 {
+  font-family: QCF_P430;
+}
+
+@font-face {
+  font-family: QCF_P431;
+  src: url(../app/fonts/QCF_P431.TTF);
+}
+
+.QCF_P431 {
+  font-family: QCF_P431;
+}
+
+@font-face {
+  font-family: QCF_P432;
+  src: url(../app/fonts/QCF_P432.TTF);
+}
+
+.QCF_P432 {
+  font-family: QCF_P432;
+}
+
+@font-face {
+  font-family: QCF_P433;
+  src: url(../app/fonts/QCF_P433.TTF);
+}
+
+.QCF_P433 {
+  font-family: QCF_P433;
+}
+
+@font-face {
+  font-family: QCF_P434;
+  src: url(../app/fonts/QCF_P434.TTF);
+}
+
+.QCF_P434 {
+  font-family: QCF_P434;
+}
+
+@font-face {
+  font-family: QCF_P435;
+  src: url(../app/fonts/QCF_P435.TTF);
+}
+
+.QCF_P435 {
+  font-family: QCF_P435;
+}
+
+@font-face {
+  font-family: QCF_P436;
+  src: url(../app/fonts/QCF_P436.TTF);
+}
+
+.QCF_P436 {
+  font-family: QCF_P436;
+}
+
+@font-face {
+  font-family: QCF_P437;
+  src: url(../app/fonts/QCF_P437.TTF);
+}
+
+.QCF_P437 {
+  font-family: QCF_P437;
+}
+
+@font-face {
+  font-family: QCF_P438;
+  src: url(../app/fonts/QCF_P438.TTF);
+}
+
+.QCF_P438 {
+  font-family: QCF_P438;
+}
+
+@font-face {
+  font-family: QCF_P439;
+  src: url(../app/fonts/QCF_P439.TTF);
+}
+
+.QCF_P439 {
+  font-family: QCF_P439;
+}
+
+@font-face {
+  font-family: QCF_P440;
+  src: url(../app/fonts/QCF_P440.TTF);
+}
+
+.QCF_P440 {
+  font-family: QCF_P440;
+}
+
+@font-face {
+  font-family: QCF_P441;
+  src: url(../app/fonts/QCF_P441.TTF);
+}
+
+.QCF_P441 {
+  font-family: QCF_P441;
+}
+
+@font-face {
+  font-family: QCF_P442;
+  src: url(../app/fonts/QCF_P442.TTF);
+}
+
+.QCF_P442 {
+  font-family: QCF_P442;
+}
+
+@font-face {
+  font-family: QCF_P443;
+  src: url(../app/fonts/QCF_P443.TTF);
+}
+
+.QCF_P443 {
+  font-family: QCF_P443;
+}
+
+@font-face {
+  font-family: QCF_P444;
+  src: url(../app/fonts/QCF_P444.TTF);
+}
+
+.QCF_P444 {
+  font-family: QCF_P444;
+}
+
+@font-face {
+  font-family: QCF_P445;
+  src: url(../app/fonts/QCF_P445.TTF);
+}
+
+.QCF_P445 {
+  font-family: QCF_P445;
+}
+
+@font-face {
+  font-family: QCF_P446;
+  src: url(../app/fonts/QCF_P446.TTF);
+}
+
+.QCF_P446 {
+  font-family: QCF_P446;
+}
+
+@font-face {
+  font-family: QCF_P447;
+  src: url(../app/fonts/QCF_P447.TTF);
+}
+
+.QCF_P447 {
+  font-family: QCF_P447;
+}
+
+@font-face {
+  font-family: QCF_P448;
+  src: url(../app/fonts/QCF_P448.TTF);
+}
+
+.QCF_P448 {
+  font-family: QCF_P448;
+}
+
+@font-face {
+  font-family: QCF_P449;
+  src: url(../app/fonts/QCF_P449.TTF);
+}
+
+.QCF_P449 {
+  font-family: QCF_P449;
+}
+
+@font-face {
+  font-family: QCF_P450;
+  src: url(../app/fonts/QCF_P450.TTF);
+}
+
+.QCF_P450 {
+  font-family: QCF_P450;
+}
+
+@font-face {
+  font-family: QCF_P451;
+  src: url(../app/fonts/QCF_P451.TTF);
+}
+
+.QCF_P451 {
+  font-family: QCF_P451;
+}
+
+@font-face {
+  font-family: QCF_P452;
+  src: url(../app/fonts/QCF_P452.TTF);
+}
+
+.QCF_P452 {
+  font-family: QCF_P452;
+}
+
+@font-face {
+  font-family: QCF_P453;
+  src: url(../app/fonts/QCF_P453.TTF);
+}
+
+.QCF_P453 {
+  font-family: QCF_P453;
+}
+
+@font-face {
+  font-family: QCF_P454;
+  src: url(../app/fonts/QCF_P454.TTF);
+}
+
+.QCF_P454 {
+  font-family: QCF_P454;
+}
+
+@font-face {
+  font-family: QCF_P455;
+  src: url(../app/fonts/QCF_P455.TTF);
+}
+
+.QCF_P455 {
+  font-family: QCF_P455;
+}
+
+@font-face {
+  font-family: QCF_P456;
+  src: url(../app/fonts/QCF_P456.TTF);
+}
+
+.QCF_P456 {
+  font-family: QCF_P456;
+}
+
+@font-face {
+  font-family: QCF_P457;
+  src: url(../app/fonts/QCF_P457.TTF);
+}
+
+.QCF_P457 {
+  font-family: QCF_P457;
+}
+
+@font-face {
+  font-family: QCF_P458;
+  src: url(../app/fonts/QCF_P458.TTF);
+}
+
+.QCF_P458 {
+  font-family: QCF_P458;
+}
+
+@font-face {
+  font-family: QCF_P459;
+  src: url(../app/fonts/QCF_P459.TTF);
+}
+
+.QCF_P459 {
+  font-family: QCF_P459;
+}
+
+@font-face {
+  font-family: QCF_P460;
+  src: url(../app/fonts/QCF_P460.TTF);
+}
+
+.QCF_P460 {
+  font-family: QCF_P460;
+}
+
+@font-face {
+  font-family: QCF_P461;
+  src: url(../app/fonts/QCF_P461.TTF);
+}
+
+.QCF_P461 {
+  font-family: QCF_P461;
+}
+
+@font-face {
+  font-family: QCF_P462;
+  src: url(../app/fonts/QCF_P462.TTF);
+}
+
+.QCF_P462 {
+  font-family: QCF_P462;
+}
+
+@font-face {
+  font-family: QCF_P463;
+  src: url(../app/fonts/QCF_P463.TTF);
+}
+
+.QCF_P463 {
+  font-family: QCF_P463;
+}
+
+@font-face {
+  font-family: QCF_P464;
+  src: url(../app/fonts/QCF_P464.TTF);
+}
+
+.QCF_P464 {
+  font-family: QCF_P464;
+}
+
+@font-face {
+  font-family: QCF_P465;
+  src: url(../app/fonts/QCF_P465.TTF);
+}
+
+.QCF_P465 {
+  font-family: QCF_P465;
+}
+
+@font-face {
+  font-family: QCF_P466;
+  src: url(../app/fonts/QCF_P466.TTF);
+}
+
+.QCF_P466 {
+  font-family: QCF_P466;
+}
+
+@font-face {
+  font-family: QCF_P467;
+  src: url(../app/fonts/QCF_P467.TTF);
+}
+
+.QCF_P467 {
+  font-family: QCF_P467;
+}
+
+@font-face {
+  font-family: QCF_P468;
+  src: url(../app/fonts/QCF_P468.TTF);
+}
+
+.QCF_P468 {
+  font-family: QCF_P468;
+}
+
+@font-face {
+  font-family: QCF_P469;
+  src: url(../app/fonts/QCF_P469.TTF);
+}
+
+.QCF_P469 {
+  font-family: QCF_P469;
+}
+
+@font-face {
+  font-family: QCF_P470;
+  src: url(../app/fonts/QCF_P470.TTF);
+}
+
+.QCF_P470 {
+  font-family: QCF_P470;
+}
+
+@font-face {
+  font-family: QCF_P471;
+  src: url(../app/fonts/QCF_P471.TTF);
+}
+
+.QCF_P471 {
+  font-family: QCF_P471;
+}
+
+@font-face {
+  font-family: QCF_P472;
+  src: url(../app/fonts/QCF_P472.TTF);
+}
+
+.QCF_P472 {
+  font-family: QCF_P472;
+}
+
+@font-face {
+  font-family: QCF_P473;
+  src: url(../app/fonts/QCF_P473.TTF);
+}
+
+.QCF_P473 {
+  font-family: QCF_P473;
+}
+
+@font-face {
+  font-family: QCF_P474;
+  src: url(../app/fonts/QCF_P474.TTF);
+}
+
+.QCF_P474 {
+  font-family: QCF_P474;
+}
+
+@font-face {
+  font-family: QCF_P475;
+  src: url(../app/fonts/QCF_P475.TTF);
+}
+
+.QCF_P475 {
+  font-family: QCF_P475;
+}
+
+@font-face {
+  font-family: QCF_P476;
+  src: url(../app/fonts/QCF_P476.TTF);
+}
+
+.QCF_P476 {
+  font-family: QCF_P476;
+}
+
+@font-face {
+  font-family: QCF_P477;
+  src: url(../app/fonts/QCF_P477.TTF);
+}
+
+.QCF_P477 {
+  font-family: QCF_P477;
+}
+
+@font-face {
+  font-family: QCF_P478;
+  src: url(../app/fonts/QCF_P478.TTF);
+}
+
+.QCF_P478 {
+  font-family: QCF_P478;
+}
+
+@font-face {
+  font-family: QCF_P479;
+  src: url(../app/fonts/QCF_P479.TTF);
+}
+
+.QCF_P479 {
+  font-family: QCF_P479;
+}
+
+@font-face {
+  font-family: QCF_P480;
+  src: url(../app/fonts/QCF_P480.TTF);
+}
+
+.QCF_P480 {
+  font-family: QCF_P480;
+}
+
+@font-face {
+  font-family: QCF_P481;
+  src: url(../app/fonts/QCF_P481.TTF);
+}
+
+.QCF_P481 {
+  font-family: QCF_P481;
+}
+
+@font-face {
+  font-family: QCF_P482;
+  src: url(../app/fonts/QCF_P482.TTF);
+}
+
+.QCF_P482 {
+  font-family: QCF_P482;
+}
+
+@font-face {
+  font-family: QCF_P483;
+  src: url(../app/fonts/QCF_P483.TTF);
+}
+
+.QCF_P483 {
+  font-family: QCF_P483;
+}
+
+@font-face {
+  font-family: QCF_P484;
+  src: url(../app/fonts/QCF_P484.TTF);
+}
+
+.QCF_P484 {
+  font-family: QCF_P484;
+}
+
+@font-face {
+  font-family: QCF_P485;
+  src: url(../app/fonts/QCF_P485.TTF);
+}
+
+.QCF_P485 {
+  font-family: QCF_P485;
+}
+
+@font-face {
+  font-family: QCF_P486;
+  src: url(../app/fonts/QCF_P486.TTF);
+}
+
+.QCF_P486 {
+  font-family: QCF_P486;
+}
+
+@font-face {
+  font-family: QCF_P487;
+  src: url(../app/fonts/QCF_P487.TTF);
+}
+
+.QCF_P487 {
+  font-family: QCF_P487;
+}
+
+@font-face {
+  font-family: QCF_P488;
+  src: url(../app/fonts/QCF_P488.TTF);
+}
+
+.QCF_P488 {
+  font-family: QCF_P488;
+}
+
+@font-face {
+  font-family: QCF_P489;
+  src: url(../app/fonts/QCF_P489.TTF);
+}
+
+.QCF_P489 {
+  font-family: QCF_P489;
+}
+
+@font-face {
+  font-family: QCF_P490;
+  src: url(../app/fonts/QCF_P490.TTF);
+}
+
+.QCF_P490 {
+  font-family: QCF_P490;
+}
+
+@font-face {
+  font-family: QCF_P491;
+  src: url(../app/fonts/QCF_P491.TTF);
+}
+
+.QCF_P491 {
+  font-family: QCF_P491;
+}
+
+@font-face {
+  font-family: QCF_P492;
+  src: url(../app/fonts/QCF_P492.TTF);
+}
+
+.QCF_P492 {
+  font-family: QCF_P492;
+}
+
+@font-face {
+  font-family: QCF_P493;
+  src: url(../app/fonts/QCF_P493.TTF);
+}
+
+.QCF_P493 {
+  font-family: QCF_P493;
+}
+
+@font-face {
+  font-family: QCF_P494;
+  src: url(../app/fonts/QCF_P494.TTF);
+}
+
+.QCF_P494 {
+  font-family: QCF_P494;
+}
+
+@font-face {
+  font-family: QCF_P495;
+  src: url(../app/fonts/QCF_P495.TTF);
+}
+
+.QCF_P495 {
+  font-family: QCF_P495;
+}
+
+@font-face {
+  font-family: QCF_P496;
+  src: url(../app/fonts/QCF_P496.TTF);
+}
+
+.QCF_P496 {
+  font-family: QCF_P496;
+}
+
+@font-face {
+  font-family: QCF_P497;
+  src: url(../app/fonts/QCF_P497.TTF);
+}
+
+.QCF_P497 {
+  font-family: QCF_P497;
+}
+
+@font-face {
+  font-family: QCF_P498;
+  src: url(../app/fonts/QCF_P498.TTF);
+}
+
+.QCF_P498 {
+  font-family: QCF_P498;
+}
+
+@font-face {
+  font-family: QCF_P499;
+  src: url(../app/fonts/QCF_P499.TTF);
+}
+
+.QCF_P499 {
+  font-family: QCF_P499;
+}
+
+@font-face {
+  font-family: QCF_P500;
+  src: url(../app/fonts/QCF_P500.TTF);
+}
+
+.QCF_P500 {
+  font-family: QCF_P500;
+}
+
+@font-face {
+  font-family: QCF_P501;
+  src: url(../app/fonts/QCF_P501.TTF);
+}
+
+.QCF_P501 {
+  font-family: QCF_P501;
+}
+
+@font-face {
+  font-family: QCF_P502;
+  src: url(../app/fonts/QCF_P502.TTF);
+}
+
+.QCF_P502 {
+  font-family: QCF_P502;
+}
+
+@font-face {
+  font-family: QCF_P503;
+  src: url(../app/fonts/QCF_P503.TTF);
+}
+
+.QCF_P503 {
+  font-family: QCF_P503;
+}
+
+@font-face {
+  font-family: QCF_P504;
+  src: url(../app/fonts/QCF_P504.TTF);
+}
+
+.QCF_P504 {
+  font-family: QCF_P504;
+}
+
+@font-face {
+  font-family: QCF_P505;
+  src: url(../app/fonts/QCF_P505.TTF);
+}
+
+.QCF_P505 {
+  font-family: QCF_P505;
+}
+
+@font-face {
+  font-family: QCF_P505;
+  src: url(../app/fonts/QCF_P505.TTF);
+}
+
+.QCF_P505 {
+  font-family: QCF_P505;
+}
+
+@font-face {
+  font-family: QCF_P506;
+  src: url(../app/fonts/QCF_P506.TTF);
+}
+
+.QCF_P506 {
+  font-family: QCF_P506;
+}
+
+@font-face {
+  font-family: QCF_P507;
+  src: url(../app/fonts/QCF_P507.TTF);
+}
+
+.QCF_P507 {
+  font-family: QCF_P507;
+}
+
+@font-face {
+  font-family: QCF_P508;
+  src: url(../app/fonts/QCF_P508.TTF);
+}
+
+.QCF_P508 {
+  font-family: QCF_P508;
+}
+
+@font-face {
+  font-family: QCF_P509;
+  src: url(../app/fonts/QCF_P509.TTF);
+}
+
+.QCF_P509 {
+  font-family: QCF_P509;
+}
+
+@font-face {
+  font-family: QCF_P510;
+  src: url(../app/fonts/QCF_P510.TTF);
+}
+
+.QCF_P510 {
+  font-family: QCF_P510;
+}
+
+@font-face {
+  font-family: QCF_P511;
+  src: url(../app/fonts/QCF_P511.TTF);
+}
+
+.QCF_P511 {
+  font-family: QCF_P511;
+}
+
+@font-face {
+  font-family: QCF_P512;
+  src: url(../app/fonts/QCF_P512.TTF);
+}
+
+.QCF_P512 {
+  font-family: QCF_P512;
+}
+
+@font-face {
+  font-family: QCF_P513;
+  src: url(../app/fonts/QCF_P513.TTF);
+}
+
+.QCF_P513 {
+  font-family: QCF_P513;
+}
+
+@font-face {
+  font-family: QCF_P514;
+  src: url(../app/fonts/QCF_P514.TTF);
+}
+
+.QCF_P514 {
+  font-family: QCF_P514;
+}
+
+@font-face {
+  font-family: QCF_P515;
+  src: url(../app/fonts/QCF_P515.TTF);
+}
+
+.QCF_P515 {
+  font-family: QCF_P515;
+}
+
+@font-face {
+  font-family: QCF_P516;
+  src: url(../app/fonts/QCF_P516.TTF);
+}
+
+.QCF_P516 {
+  font-family: QCF_P516;
+}
+
+@font-face {
+  font-family: QCF_P517;
+  src: url(../app/fonts/QCF_P517.TTF);
+}
+
+.QCF_P517 {
+  font-family: QCF_P517;
+}
+
+@font-face {
+  font-family: QCF_P518;
+  src: url(../app/fonts/QCF_P518.TTF);
+}
+
+.QCF_P518 {
+  font-family: QCF_P518;
+}
+
+@font-face {
+  font-family: QCF_P519;
+  src: url(../app/fonts/QCF_P519.TTF);
+}
+
+.QCF_P519 {
+  font-family: QCF_P519;
+}
+
+@font-face {
+  font-family: QCF_P520;
+  src: url(../app/fonts/QCF_P520.TTF);
+}
+
+.QCF_P520 {
+  font-family: QCF_P520;
+}
+
+@font-face {
+  font-family: QCF_P521;
+  src: url(../app/fonts/QCF_P521.TTF);
+}
+
+.QCF_P521 {
+  font-family: QCF_P521;
+}
+
+@font-face {
+  font-family: QCF_P522;
+  src: url(../app/fonts/QCF_P522.TTF);
+}
+
+.QCF_P522 {
+  font-family: QCF_P522;
+}
+
+@font-face {
+  font-family: QCF_P523;
+  src: url(../app/fonts/QCF_P523.TTF);
+}
+
+.QCF_P523 {
+  font-family: QCF_P523;
+}
+
+@font-face {
+  font-family: QCF_P524;
+  src: url(../app/fonts/QCF_P524.TTF);
+}
+
+.QCF_P524 {
+  font-family: QCF_P524;
+}
+
+@font-face {
+  font-family: QCF_P525;
+  src: url(../app/fonts/QCF_P525.TTF);
+}
+
+.QCF_P525 {
+  font-family: QCF_P525;
+}
+
+@font-face {
+  font-family: QCF_P526;
+  src: url(../app/fonts/QCF_P526.TTF);
+}
+
+.QCF_P526 {
+  font-family: QCF_P526;
+}
+
+@font-face {
+  font-family: QCF_P527;
+  src: url(../app/fonts/QCF_P527.TTF);
+}
+
+.QCF_P527 {
+  font-family: QCF_P527;
+}
+
+@font-face {
+  font-family: QCF_P528;
+  src: url(../app/fonts/QCF_P528.TTF);
+}
+
+.QCF_P528 {
+  font-family: QCF_P528;
+}
+
+@font-face {
+  font-family: QCF_P529;
+  src: url(../app/fonts/QCF_P529.TTF);
+}
+
+.QCF_P529 {
+  font-family: QCF_P529;
+}
+
+@font-face {
+  font-family: QCF_P530;
+  src: url(../app/fonts/QCF_P530.TTF);
+}
+
+.QCF_P530 {
+  font-family: QCF_P530;
+}
+
+@font-face {
+  font-family: QCF_P531;
+  src: url(../app/fonts/QCF_P531.TTF);
+}
+
+.QCF_P531 {
+  font-family: QCF_P531;
+}
+
+@font-face {
+  font-family: QCF_P532;
+  src: url(../app/fonts/QCF_P532.TTF);
+}
+
+.QCF_P532 {
+  font-family: QCF_P532;
+}
+
+@font-face {
+  font-family: QCF_P533;
+  src: url(../app/fonts/QCF_P533.TTF);
+}
+
+.QCF_P533 {
+  font-family: QCF_P533;
+}
+
+@font-face {
+  font-family: QCF_P534;
+  src: url(../app/fonts/QCF_P534.TTF);
+}
+
+.QCF_P534 {
+  font-family: QCF_P534;
+}
+
+@font-face {
+  font-family: QCF_P535;
+  src: url(../app/fonts/QCF_P535.TTF);
+}
+
+.QCF_P535 {
+  font-family: QCF_P535;
+}
+
+@font-face {
+  font-family: QCF_P536;
+  src: url(../app/fonts/QCF_P536.TTF);
+}
+
+.QCF_P536 {
+  font-family: QCF_P536;
+}
+
+@font-face {
+  font-family: QCF_P537;
+  src: url(../app/fonts/QCF_P537.TTF);
+}
+
+.QCF_P537 {
+  font-family: QCF_P537;
+}
+
+@font-face {
+  font-family: QCF_P538;
+  src: url(../app/fonts/QCF_P538.TTF);
+}
+
+.QCF_P538 {
+  font-family: QCF_P538;
+}
+
+@font-face {
+  font-family: QCF_P539;
+  src: url(../app/fonts/QCF_P539.TTF);
+}
+
+.QCF_P539 {
+  font-family: QCF_P539;
+}
+
+@font-face {
+  font-family: QCF_P540;
+  src: url(../app/fonts/QCF_P540.TTF);
+}
+
+.QCF_P540 {
+  font-family: QCF_P540;
+}
+
+@font-face {
+  font-family: QCF_P541;
+  src: url(../app/fonts/QCF_P541.TTF);
+}
+
+.QCF_P541 {
+  font-family: QCF_P541;
+}
+
+@font-face {
+  font-family: QCF_P542;
+  src: url(../app/fonts/QCF_P542.TTF);
+}
+
+.QCF_P542 {
+  font-family: QCF_P542;
+}
+
+@font-face {
+  font-family: QCF_P543;
+  src: url(../app/fonts/QCF_P543.TTF);
+}
+
+.QCF_P543 {
+  font-family: QCF_P543;
+}
+
+@font-face {
+  font-family: QCF_P544;
+  src: url(../app/fonts/QCF_P544.TTF);
+}
+
+.QCF_P544 {
+  font-family: QCF_P544;
+}
+
+@font-face {
+  font-family: QCF_P545;
+  src: url(../app/fonts/QCF_P545.TTF);
+}
+
+.QCF_P545 {
+  font-family: QCF_P545;
+}
+
+@font-face {
+  font-family: QCF_P546;
+  src: url(../app/fonts/QCF_P546.TTF);
+}
+
+.QCF_P546 {
+  font-family: QCF_P546;
+}
+
+@font-face {
+  font-family: QCF_P547;
+  src: url(../app/fonts/QCF_P547.TTF);
+}
+
+.QCF_P547 {
+  font-family: QCF_P547;
+}
+
+@font-face {
+  font-family: QCF_P548;
+  src: url(../app/fonts/QCF_P548.TTF);
+}
+
+.QCF_P548 {
+  font-family: QCF_P548;
+}
+
+@font-face {
+  font-family: QCF_P549;
+  src: url(../app/fonts/QCF_P549.TTF);
+}
+
+.QCF_P549 {
+  font-family: QCF_P549;
+}
+
+@font-face {
+  font-family: QCF_P550;
+  src: url(../app/fonts/QCF_P550.TTF);
+}
+
+.QCF_P550 {
+  font-family: QCF_P550;
+}
+
+@font-face {
+  font-family: QCF_P551;
+  src: url(../app/fonts/QCF_P551.TTF);
+}
+
+.QCF_P551 {
+  font-family: QCF_P551;
+}
+
+@font-face {
+  font-family: QCF_P552;
+  src: url(../app/fonts/QCF_P552.TTF);
+}
+
+.QCF_P552 {
+  font-family: QCF_P552;
+}
+
+@font-face {
+  font-family: QCF_P553;
+  src: url(../app/fonts/QCF_P553.TTF);
+}
+
+.QCF_P553 {
+  font-family: QCF_P553;
+}
+
+@font-face {
+  font-family: QCF_P554;
+  src: url(../app/fonts/QCF_P554.TTF);
+}
+
+.QCF_P554 {
+  font-family: QCF_P554;
+}
+
+@font-face {
+  font-family: QCF_P555;
+  src: url(../app/fonts/QCF_P555.TTF);
+}
+
+.QCF_P555 {
+  font-family: QCF_P555;
+}
+
+@font-face {
+  font-family: QCF_P556;
+  src: url(../app/fonts/QCF_P556.TTF);
+}
+
+.QCF_P556 {
+  font-family: QCF_P556;
+}
+
+@font-face {
+  font-family: QCF_P557;
+  src: url(../app/fonts/QCF_P557.TTF);
+}
+
+.QCF_P557 {
+  font-family: QCF_P557;
+}
+
+@font-face {
+  font-family: QCF_P558;
+  src: url(../app/fonts/QCF_P558.TTF);
+}
+
+.QCF_P558 {
+  font-family: QCF_P558;
+}
+
+@font-face {
+  font-family: QCF_P559;
+  src: url(../app/fonts/QCF_P559.TTF);
+}
+
+.QCF_P559 {
+  font-family: QCF_P559;
+}
+
+@font-face {
+  font-family: QCF_P560;
+  src: url(../app/fonts/QCF_P560.TTF);
+}
+
+.QCF_P560 {
+  font-family: QCF_P560;
+}
+
+@font-face {
+  font-family: QCF_P561;
+  src: url(../app/fonts/QCF_P561.TTF);
+}
+
+.QCF_P561 {
+  font-family: QCF_P561;
+}
+
+@font-face {
+  font-family: QCF_P562;
+  src: url(../app/fonts/QCF_P562.TTF);
+}
+
+.QCF_P562 {
+  font-family: QCF_P562;
+}
+
+@font-face {
+  font-family: QCF_P563;
+  src: url(../app/fonts/QCF_P563.TTF);
+}
+
+.QCF_P563 {
+  font-family: QCF_P563;
+}
+
+@font-face {
+  font-family: QCF_P564;
+  src: url(../app/fonts/QCF_P564.TTF);
+}
+
+.QCF_P564 {
+  font-family: QCF_P564;
+}
+
+@font-face {
+  font-family: QCF_P565;
+  src: url(../app/fonts/QCF_P565.TTF);
+}
+
+.QCF_P565 {
+  font-family: QCF_P565;
+}
+
+@font-face {
+  font-family: QCF_P566;
+  src: url(../app/fonts/QCF_P566.TTF);
+}
+
+.QCF_P566 {
+  font-family: QCF_P566;
+}
+
+@font-face {
+  font-family: QCF_P567;
+  src: url(../app/fonts/QCF_P567.TTF);
+}
+
+.QCF_P567 {
+  font-family: QCF_P567;
+}
+
+@font-face {
+  font-family: QCF_P568;
+  src: url(../app/fonts/QCF_P568.TTF);
+}
+
+.QCF_P568 {
+  font-family: QCF_P568;
+}
+
+@font-face {
+  font-family: QCF_P569;
+  src: url(../app/fonts/QCF_P569.TTF);
+}
+
+.QCF_P569 {
+  font-family: QCF_P569;
+}
+
+@font-face {
+  font-family: QCF_P570;
+  src: url(../app/fonts/QCF_P570.TTF);
+}
+
+.QCF_P570 {
+  font-family: QCF_P570;
+}
+
+@font-face {
+  font-family: QCF_P571;
+  src: url(../app/fonts/QCF_P571.TTF);
+}
+
+.QCF_P571 {
+  font-family: QCF_P571;
+}
+
+@font-face {
+  font-family: QCF_P572;
+  src: url(../app/fonts/QCF_P572.TTF);
+}
+
+.QCF_P572 {
+  font-family: QCF_P572;
+}
+
+@font-face {
+  font-family: QCF_P573;
+  src: url(../app/fonts/QCF_P573.TTF);
+}
+
+.QCF_P573 {
+  font-family: QCF_P573;
+}
+
+@font-face {
+  font-family: QCF_P574;
+  src: url(../app/fonts/QCF_P574.TTF);
+}
+
+.QCF_P574 {
+  font-family: QCF_P574;
+}
+
+@font-face {
+  font-family: QCF_P575;
+  src: url(../app/fonts/QCF_P575.TTF);
+}
+
+.QCF_P575 {
+  font-family: QCF_P575;
+}
+
+@font-face {
+  font-family: QCF_P576;
+  src: url(../app/fonts/QCF_P576.TTF);
+}
+
+.QCF_P576 {
+  font-family: QCF_P576;
+}
+
+@font-face {
+  font-family: QCF_P577;
+  src: url(../app/fonts/QCF_P577.TTF);
+}
+
+.QCF_P577 {
+  font-family: QCF_P577;
+}
+
+@font-face {
+  font-family: QCF_P578;
+  src: url(../app/fonts/QCF_P578.TTF);
+}
+
+.QCF_P578 {
+  font-family: QCF_P578;
+}
+
+@font-face {
+  font-family: QCF_P579;
+  src: url(../app/fonts/QCF_P579.TTF);
+}
+
+.QCF_P579 {
+  font-family: QCF_P579;
+}
+
+@font-face {
+  font-family: QCF_P580;
+  src: url(../app/fonts/QCF_P580.TTF);
+}
+
+.QCF_P580 {
+  font-family: QCF_P580;
+}
+
+@font-face {
+  font-family: QCF_P581;
+  src: url(../app/fonts/QCF_P581.TTF);
+}
+
+.QCF_P581 {
+  font-family: QCF_P581;
+}
+
+@font-face {
+  font-family: QCF_P582;
+  src: url(../app/fonts/QCF_P582.TTF);
+}
+
+.QCF_P582 {
+  font-family: QCF_P582;
+}
+
+@font-face {
+  font-family: QCF_P583;
+  src: url(../app/fonts/QCF_P583.TTF);
+}
+
+.QCF_P583 {
+  font-family: QCF_P583;
+}
+
+@font-face {
+  font-family: QCF_P584;
+  src: url(../app/fonts/QCF_P584.TTF);
+}
+
+.QCF_P584 {
+  font-family: QCF_P584;
+}
+
+@font-face {
+  font-family: QCF_P585;
+  src: url(../app/fonts/QCF_P585.TTF);
+}
+
+.QCF_P585 {
+  font-family: QCF_P585;
+}
+
+@font-face {
+  font-family: QCF_P586;
+  src: url(../app/fonts/QCF_P586.TTF);
+}
+
+.QCF_P586 {
+  font-family: QCF_P586;
+}
+
+@font-face {
+  font-family: QCF_P587;
+  src: url(../app/fonts/QCF_P587.TTF);
+}
+
+.QCF_P587 {
+  font-family: QCF_P587;
+}
+
+@font-face {
+  font-family: QCF_P588;
+  src: url(../app/fonts/QCF_P588.TTF);
+}
+
+.QCF_P588 {
+  font-family: QCF_P588;
+}
+
+@font-face {
+  font-family: QCF_P589;
+  src: url(../app/fonts/QCF_P589.TTF);
+}
+
+.QCF_P589 {
+  font-family: QCF_P589;
+}
+
+@font-face {
+  font-family: QCF_P590;
+  src: url(../app/fonts/QCF_P590.TTF);
+}
+
+.QCF_P590 {
+  font-family: QCF_P590;
+}
+
+@font-face {
+  font-family: QCF_P591;
+  src: url(../app/fonts/QCF_P591.TTF);
+}
+
+.QCF_P591 {
+  font-family: QCF_P591;
+}
+
+@font-face {
+  font-family: QCF_P592;
+  src: url(../app/fonts/QCF_P592.TTF);
+}
+
+.QCF_P592 {
+  font-family: QCF_P592;
+}
+
+@font-face {
+  font-family: QCF_P593;
+  src: url(../app/fonts/QCF_P593.TTF);
+}
+
+.QCF_P593 {
+  font-family: QCF_P593;
+}
+
+@font-face {
+  font-family: QCF_P594;
+  src: url(../app/fonts/QCF_P594.TTF);
+}
+
+.QCF_P594 {
+  font-family: QCF_P594;
+}
+
+@font-face {
+  font-family: QCF_P595;
+  src: url(../app/fonts/QCF_P595.TTF);
+}
+
+.QCF_P595 {
+  font-family: QCF_P595;
+}
+
+@font-face {
+  font-family: QCF_P596;
+  src: url(../app/fonts/QCF_P596.TTF);
+}
+
+.QCF_P596 {
+  font-family: QCF_P596;
+}
+
+@font-face {
+  font-family: QCF_P597;
+  src: url(../app/fonts/QCF_P597.TTF);
+}
+
+.QCF_P597 {
+  font-family: QCF_P597;
+}
+
+@font-face {
+  font-family: QCF_P598;
+  src: url(../app/fonts/QCF_P598.TTF);
+}
+
+.QCF_P598 {
+  font-family: QCF_P598;
+}
+
+@font-face {
+  font-family: QCF_P599;
+  src: url(../app/fonts/QCF_P599.TTF);
+}
+
+.QCF_P599 {
+  font-family: QCF_P599;
+}
+
+@font-face {
+  font-family: QCF_P600;
+  src: url(../app/fonts/QCF_P600.TTF);
+}
+
+.QCF_P600 {
+  font-family: QCF_P600;
+}
+
+@font-face {
+  font-family: QCF_P601;
+  src: url(../app/fonts/QCF_P601.TTF);
+}
+
+.QCF_P601 {
+  font-family: QCF_P601;
+}
+
+@font-face {
+  font-family: QCF_P602;
+  src: url(../app/fonts/QCF_P602.TTF);
+}
+
+.QCF_P602 {
+  font-family: QCF_P602;
+}
+
+@font-face {
+  font-family: QCF_P603;
+  src: url(../app/fonts/QCF_P603.TTF);
+}
+
+.QCF_P603 {
+  font-family: QCF_P603;
+}
+
+@font-face {
+  font-family: QCF_P604;
+  src: url(../app/fonts/QCF_P604.TTF);
+}
+
+.QCF_P604 {
+  font-family: QCF_P604;
+}
