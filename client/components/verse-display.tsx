@@ -46,7 +46,7 @@ export function VerseDisplay({
     const chapter = verseKey.split(":")[0];
 
     const verseKeys = Array.from(
-      { length: versesToShow },
+      { length: versesToShow + 1 },
       (_, i) => `${chapter}:${verseNumber + i}` as VerseKey
     );
 
@@ -68,7 +68,7 @@ export function VerseDisplay({
   return (
     <Card className="w-full">
       <CardContent className="p-8 text-right">
-        {Array.from({ length: revealVerses ? versesToShow : 1 }).map((_, index) => (
+        {Array.from({ length: revealVerses ? versesToShow + 1 : 1 }).map((_, index) => (
           <span
             key={index}
             className={`${getQcfCodeStr(
