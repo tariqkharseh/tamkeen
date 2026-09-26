@@ -7,6 +7,15 @@ import { AudioPlayer } from "@/components/audio-player";
 import { MushafModal } from "@/components/mushaf-modal";
 import { TestControls } from "@/components/test-controls";
 import { ResultsScreen } from "@/components/results-screen";
+import { LiveTranscription } from "@/components/live-transcription";
+import { RecitationResultCard } from "@/components/recitation-result";
+import {
+  compareRecitation,
+  fetchVerseTexts,
+  RecitationResult,
+  VerseTexts,
+} from "@/lib/recitation";
+import { EMPTY_TRANSCRIPT, LiveTranscript } from "@/lib/word-alignment";
 import { getQuranClientInstance } from "@/lib/quran-client";
 import { Button } from "@/components/ui/button";
 import { FaBook } from "react-icons/fa";
@@ -38,6 +47,9 @@ export default function Home() {
   const [isLoadingAudio, setIsLoadingAudio] = useState(false);
   const [mushafModalOpen, setMushafModalOpen] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [recitationResult, setRecitationResult] = useState<RecitationResult | null>(null);
+  const [isChecking, setIsChecking] = useState(false);
+  const [liveTranscript, setLiveTranscript] = useState<LiveTranscript>(EMPTY_TRANSCRIPT);
   
   const [score, setScore] = useState({ correct: 0, incorrect: 0, total: 0 });
 
@@ -223,14 +235,46 @@ export default function Home() {
     }
   };
 
-  const handleAnswer = (isCorrect: boolean) => {
+  const recordAnswer = (isCorrect: boolean) => {
     setScore((prev) => ({
       correct: isCorrect ? prev.correct + 1 : prev.correct,
       incorrect: !isCorrect ? prev.incorrect + 1 : prev.incorrect,
       total: prev.total + 1,
     }));
+  };
 
-    // Load next verse
+  const handleRecordingStop = async (transcript: string) => {
+    if (!verseData) return;
+    if (!transcript) {
+      alert("Nothing was transcribed. Please try recording again.");
+      return;
+    }
+
+    setIsChecking(true);
+    try {
+      const chapter = verseData.verseKey.split(":")[0];
+      const keys = Array.from(
+        { length: numVersesToRead + 1 },
+        (_, i) => `${chapter}:${verseData.verseNumber + i}` as VerseKey
+      );
+      const [prompt, ...answer] = await fetchVerseTexts(keys);
+      const answerVerses = answer.filter((v): v is VerseTexts => v !== null);
+
+      const result = compareRecitation(transcript, prompt, answerVerses);
+      recordAnswer(result.isCorrect);
+      setRecitationResult(result);
+      setShowAnswer(true);
+    } catch (error) {
+      console.error("Error checking recitation:", error);
+      alert("Error checking recitation. Please try again.");
+    } finally {
+      setIsChecking(false);
+    }
+  };
+
+  const goToNextVerse = () => {
+    setRecitationResult(null);
+    setLiveTranscript(EMPTY_TRANSCRIPT);
     loadNewVerse(rangeType, {
       juzStart: rangeType === "juz" ? rangeStart : undefined,
       juzEnd: rangeType === "juz" ? rangeEnd : undefined,
@@ -249,6 +293,8 @@ export default function Home() {
     setTestState("setup");
     setVerseData(null);
     setAudioUrl(null);
+    setRecitationResult(null);
+    setLiveTranscript(EMPTY_TRANSCRIPT);
     setScore({ correct: 0, incorrect: 0, total: 0 });
   };
 
@@ -282,6 +328,7 @@ export default function Home() {
                   verseNumber={verseData.verseNumber}
                   versesToShow={numVersesToRead}
                   revealVerses={showAnswer}
+                  transcript={liveTranscript}
                 />
                 
                 <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
@@ -306,11 +353,28 @@ export default function Home() {
                   </Button>
                 </div>
 
-                <TestControls
-                  onCorrect={() => handleAnswer(true)}
-                  onIncorrect={() => handleAnswer(false)}
-                  onEndTest={handleEndTest}
+                <LiveTranscription
+                  resetKey={verseData.verseKey}
+                  disabled={isChecking || recitationResult !== null}
+                  onStop={handleRecordingStop}
+                  onTranscriptChange={setLiveTranscript}
                 />
+
+                {isChecking && (
+                  <div className="text-center text-muted-foreground">
+                    Checking recitation...
+                  </div>
+                )}
+
+                {recitationResult ? (
+                  <RecitationResultCard
+                    result={recitationResult}
+                    onNext={goToNextVerse}
+                    onEndTest={handleEndTest}
+                  />
+                ) : (
+                  <TestControls onEndTest={handleEndTest} />
+                )}
               </>
             ) : null}
 
